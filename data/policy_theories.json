@@ -1,0 +1,103 @@
+{
+	"policy_theories":[
+		{
+			"id":"t_institutes",
+			"name":"NIH Institutes",
+			"description":{
+				"nih":"To improve the U.S. government’s capabilities to speed research that can improve the health of all Americans, President Biden is proposing the establishment of the Advanced Research Projects Agency for Health (ARPA-H). Included in the President’s FY2022 budget as a component of the National Institutes of Health (NIH) with a requested funding level of $6.5B available for three years, ARPA-H will be tasked with building high-risk, high-reward capabilities (or platforms) to drive biomedical breakthroughs—ranging from molecular to societal—that would provide transformative solutions for all patients.",
+				"arpa":"To improve the U.S. government’s capabilities to speed research that can improve the health of all Americans, President Biden is proposing the establishment of the Advanced Research Projects Agency for Health (ARPA-H). Included in the President’s FY2022 budget as a component of the National Institutes of Health (NIH) with a requested funding level of $6.5B available for three years, ARPA-H will be tasked with building high-risk, high-reward capabilities (or platforms) to drive biomedical breakthroughs—ranging from molecular to societal—that would provide transformative solutions for all patients."
+			}
+		},
+		{
+			"id":"t_commonFund",
+			"name":"Common Fund",
+			"description": "The [NIH Common Fund] is a component of the NIH budget which is managed by the Office of Strategic Coordination/Division of Program Coordination, Planning, and Strategic Coordination/Office of the NIH Director. Common Fund programs address emerging scientific opportunities and pressing challenges in biomedical research that no single NIH Institute or Center (IC) can address on its own, but are of high priority for the NIH as a whole. The Common Fund is a unique resource at NIH, functioning as a “venture capital” space where high-risk, innovative endeavors with the potential for extraordinary impact can be supported. Common Fund programs are short-term, goal-driven strategic investments, with deliverables intended to catalyze research across multiple biomedical research disciplines.",
+			"links":[
+				"https://commonfund.nih.gov/"
+			]
+		},
+		{
+			"id":"t_arpaH",
+			"name":"ARPA-H",
+			"description": "To improve the U.S. government’s capabilities to speed research that can improve the health of all Americans, President Biden is proposing the establishment of the [Advanced Research Projects Agency for Health] (ARPA-H). Included in the President’s FY2022 budget as a component of the National Institutes of Health (NIH) with a requested funding level of $6.5B available for three years, ARPA-H will be tasked with building high-risk, high-reward capabilities (or platforms) to drive biomedical breakthroughs—ranging from molecular to societal—that would provide transformative solutions for all patients.",
+			"links":[
+				"https://www.whitehouse.gov/wp-content/uploads/2021/09/092921-ARPA-H-FAQ.pdf"
+			]
+		},
+		{
+			"id":"t_arpaE",
+			"name":"ARPA-E",
+			"description":"ARPA-E, or [Advanced Research Projects Agency–Energy], is a United States government agency tasked with promoting and funding research and development of advanced energy technologies. It is modeled after the Defense Advanced Research Projects Agency (DARPA).",
+			"links":[
+				"https://arpa-e.energy.gov/about"
+			]
+		},
+		{
+			"id":"t_darpa",
+			"name":"DARPA",
+			"description": "The [Defense Advanced Research Projects Agency] (DARPA) is a research and development agency of the United States Department of Defense responsible for the development of emerging technologies for use by the military.Originally known as the Advanced Research Projects Agency (ARPA), the agency was created on February 7, 1958 by President Dwight D. Eisenhower in response to the Soviet launching of Sputnik 1 in 1957. By collaborating with academia, industry, and government partners, DARPA formulates and executes research and development projects to expand the frontiers of technology and science, often beyond immediate U.S. military requirements. DARPA is independent of other military research and development and reports directly to senior Department of Defense management.",
+			"links":[
+				"https://en.wikipedia.org/wiki/DARPA"
+			]
+		},
+		{
+			"id":"t_arpaI",
+			"name":"ARPA-I",
+			"description":"The Infrastructure Investment and Jobs Act, negotiated in recent months by a bipartisan group of 10 senators and the White House, would launch the Advanced Research Projects Agency-Infrastructure to provide grants to universities, companies and research foundations working on early-stage projects. The funds would go toward projects the private sector would be unlikely to take on without assistance due to “technical and financial uncertainty.” Research conducted with the grants would be aimed at reducing costs of the construction and maintenance of roads, bridges and mass transit, lowering the environmental impacts of related projects and boosting their resiliency to physical and cyber threats. ARPA-I would be headed up by a Senate-confirmed director, who would then be granted wide latitude to build a workforce for the agency."
+		},
+		{
+			"id":"t_iarpa",
+			"name":"IARPA",
+			"description":"The Intelligence Advanced Research Projects Activity (IARPA) is an organization within the Office of the Director of National Intelligence responsible for leading research to overcome difficult challenges relevant to the United States Intelligence Community. IARPA characterizes its mission as follows: 'To envision and lead high-risk, high-payoff research that delivers innovative technology for future overwhelming intelligence advantage.'"
+		},
+		{
+			"id":"t_milestonePayments",
+			"name":"Milestone payments",
+			"description":"Baryogenesis may have occurred very near the beginning of time and at unreachably high energies known as the GUT (grand unified theory) scale or the Planck scale, where the Standard Model rules probably break down. Measurements of proton decay could someday provide a window onto the GUT-scale laws of physics, but if baryogenesis occurred at the Planck scale, we may never experimentally discover or verify the mechanism behind it."
+		},
+		{
+			"id":"t_prizesChallenges",
+			"name":"Prizes and Challenges",
+			"description":"Prize competitions, also known as [“grand challenges”], typically offer a cash payment to a team that accomplishes a particular goal.  Every agency has the authority to support prize competitions of up to $50 million. \n Challenge-based acquisition allows government agencies to select solutions based on demonstrated capabilities as opposed to written proposals. A challenge-based acquisition is not only a prize competition but one where the prize is the purchase of the winning solution by the federal agency. GSA estimates that federal agencies have conducted over 1,200 prize competitions since 2010.",
+			"links":[
+				"https://www.challenge.gov"
+			]
+		},
+		{
+			"id":"t_amc",
+			"name":"Advance Market Commitments",
+			"description":"Advance Market Commitments (AMCs) are commitments to purchase a certain quantity of a product at a given price that meets key performance specifications.  This can be used to commit to purchase a product that doesn’t exist yet, which will de-risk private investment in R&D and manufacturing.  An Advance Market Commitment for a pneumococcal vaccine has resulted in the immunization of 150 million children, and saved the lives of 700,00 people.  Operation Warp Speed negotiated agreements with multiple companies to purchase millions of doses of COVID-19 vaccines, contingent on FDA approval (Emergency Use Authorization)."
+		},
+		{
+			"id":"t_volumeGuarentees",
+			"name":"Volume Guarentees",
+			"description":"Volume Guarantees are a commitment from a buyer to purchase a minimum quantity of an existing product at a set price from multiple vendors. This is generally a long-term, multi-year contract providing stability and security for the manufacturer and often allowing the buyer to negotiate a reduced price for the product or service.  The federal government uses the concept of volume guarantees in their indefinite-delivery, indefinite-quantity (IDIQ) contract type but does not leverage the techniques to shape markets or stimulate innovation. Federal agencies obligate one-third of their funding through IDIQ and spend more than $130 billion annually on these types of contracts."
+		},
+		{
+			"id":"t_apa",
+			"name":"Advance Purchase Agreements",
+			"description":"An advance purchase agreement (APA) is a contract between a single buyer and a single supplier where the buyer provides funds in advance for the supplier to acquire necessary materials, infrastructure, and manpower to manufacture the product or provide the service.  This mechanism is used by the federal government for multi-year contracts as well as to jump-start production of a product or service needed for war or national defense. It is not used for the purposes of shaping markets. Just like volume guarantees, there is an opportunity to reimagine the use of APAs for market shaping and generating innovative solutions to challenging problems."
+		},
+		{
+			"id":"t_LANL",
+			"name":"Los Alamos National Lab",
+			"description":"[Los Alamos National Laboratory] (Los Alamos or LANL for short) is a United States Department of Energy national laboratory initially organized during World War II for the design of nuclear weapons as part of the Manhattan Project. It is a short distance northwest of Santa Fe, New Mexico, in the southwestern United States. \n Los Alamos was selected as the top-secret location for bomb design in late 1942 and officially commissioned the next year, under the management of the University of California.[5] At the time it was known as Project Y and was the center for weapon design and overall coordination. Other labs, today known as Oak Ridge National Laboratory and the Hanford Site, concentrated on the production of uranium and plutonium bomb fuels. Los Alamos was the heart of the project, collecting together some of the world's most famous scientists, among them numerous Nobel Prize winners. The site was known variously as Project Y, Los Alamos Laboratory, and Los Alamos Scientific Laboratory through this period.",
+			"links":[
+				"https://en.wikipedia.org/wiki/Los_Alamos_National_Laboratory"
+			]
+		},
+		{
+			"id":"t_ANL",
+			"name":"Argonne National Lab",
+			"description":"[Argonne National Laboratory] is a science and engineering research national laboratory operated by UChicago Argonne LLC for the United States Department of Energy. The facility is located in Lemont, Illinois, outside of Chicago, and is the largest national laboratory by size and scope in the Midwest. \n Argonne had its beginnings in the Metallurgical Laboratory of the University of Chicago, formed in part to carry out Enrico Fermi's work on nuclear reactors for the Manhattan Project during World War II. After the war, it was designated as the first national laboratory in the United States on July 1, 1946. In the post-war era the lab focused primarily on non-weapon related nuclear physics, designing and building the first power-producing nuclear reactors, helping design the reactors used by the United States' nuclear navy, and a wide variety of similar projects. In 1994, the lab's nuclear mission ended, and today it maintains a broad portfolio in basic science research, energy storage and renewable energy, environmental sustainability, supercomputing, and national security.",
+			"links":[
+				"https://en.wikipedia.org/wiki/Argonne_National_Laboratory"
+			]
+		},
+		{
+			"id":"t_ORNL",
+			"name":"Oak Ridge National Lab",
+			"description":"Oak Ridge National Laboratory (ORNL) is a U.S. multiprogram science and technology national laboratory sponsored by the U.S. Department of Energy (DOE) and administered, managed, and operated by UT–Battelle as a federally funded research and development center (FFRDC) under a contract with the DOE. \n Established in 1943, ORNL is the largest science and energy national laboratory in the Department of Energy system (by size)[2] and third largest by annual budget.[3] It is located in the Roane County section of Oak Ridge, Tennessee.[4][5] Its scientific programs focus on materials, neutron science, energy, high-performance computing, systems biology and national security, sometimes in partnership with the state of Tennessee, universities and other industries. \n ORNL has several of the world's top supercomputers, including Summit, ranked by the TOP500 as Earth's second-most powerful. The lab is a leading neutron and nuclear power research facility that includes the Spallation Neutron Source the High Flux Isotope Reactor, and the Center for Nanophase Materials Sciences."
+		}
+	]
+}

@@ -1,0 +1,274 @@
+{
+	"topics":[
+		{
+			"id":"darkMatter",
+			"name":"Dark matter",
+			"size":9,
+			"date":"",
+			"question":"What are the invisible particles that seem to permeate and shape galaxies?",
+			"description":"Roughly five-sixths of the matter in the universe is missing from physicists’ equations. They infer the existence of this invisible “dark matter” through its gravitational effect on the motion of galaxies (among other things), but they haven’t yet managed to directly detect the elementary particles that comprise it. Dark matter provides the strongest indication physicists have that at least some new particles exist beyond the Standard Model, the theory of particle physics that has stood for more than 30 years. Finding dark matter would be a big step toward a more complete theory of nature.",
+			"theories":[
+				"t_WIMPs",
+				"t_sterileNeutrinos",
+				"t_axions",
+				"t_asymmetricDarkMatter",
+				"t_selfInteractingDarkMatter",
+				"t_kaluzaKleinDarkMatter"
+			],
+			"children":[
+				{
+					"id":"matterAnti",
+					"overlap":2
+				}
+			]
+		},
+		{
+			"id":"matterAnti",
+			"name":"Matter-antimatter asymmetry",
+			"size":6,
+			"date":"",
+			"question":"Why does the universe contain so much more matter than antimatter?",
+			"description":"The Standard Model of particle physics treats matter and antimatter nearly equivalently, respecting (with minor exceptions) “CP symmetry.” But it’s clear that much more matter than antimatter must have been created during the Big Bang; matter and antimatter annihilate each other upon contact, so producing equal amounts of each would have meant the wholesale annihilation of both, resulting in an empty universe. Which CP-violating process produced the surplus of baryons — matter particles that include the protons and neutrons of atomic nuclei — over antibaryons in the early universe, a process known as baryogenesis?",
+			"theories":[
+				"t_leptogenesis",
+				"t_electroweakBaryogenesis",
+				"t_asymmetricDarkMatter",
+				"t_planckGUT",
+				"t_affleckDine"
+			],
+			"children":[
+			]
+		},
+		{
+			"id":"blackHole",
+			"name":"Black hole information paradox",
+			"size":5,
+			"date":"",
+			"question":"What happens to information that falls into a black hole?",
+			"description":"Quantum mechanics says that information can be hidden or scrambled, but never destroyed. So what happens to information carried by [objects that fall into black holes], those inescapable sinkholes in space-time? According to general relativity, infalling objects will forever plunge toward the singularity at the black hole’s center. But Stephen Hawking showed in the 1970s that quantum fluctuations at the black hole’s horizon will cause it to radiate, lose mass in the process, and eventually evaporate. So, what happens to the information that fell in?",
+			"links":[
+				"https://www.quantamagazine.org/20150508-what-happens-when-you-fall-into-a-black-hole/"
+			],
+			"theories":[
+				"t_informationLoss",
+				"t_firewalls",
+				"t_fuzzballs",
+				"t_duality"
+			],
+			"children":[
+			]
+		},
+		{
+			"id":"bigBang",
+			"name":"Big Bang",
+			"size":8,
+			"date":"",
+			"question":"How and why did the universe begin?",
+			"description":"Cosmologists agree that the observable universe expanded outward from something like a point, but the original Big Bang theory (proposed by Georges Lemaître in 1931) could not explain how it grew so big, flat and uniform. Any variations in the energy density that developed during the Big Bang should quickly have become exaggerated as the denser regions gravitated, creating stark contrasts throughout the cosmos. And as space-time unfurled, it should have warped around the dense regions. But the density of the universe varied by just one part in 100,000 by the time it was 380,000 years old, according to observations of the oldest light in the sky. And a constant called Ω that measures the universe’s curvature is pegged (with an accuracy within half a percent) at 1.000, signifying perfect flatness. How did the cosmos get this way?",
+			"theories":[
+				"t_cosmicInflation",
+				"t_eternalInflation",
+				"t_cyclicUniverse"
+			],
+			"children":[
+				{
+					"id":"grandU",
+					"overlap":3
+				}
+			]
+		},
+		{
+			"id":"darkEnergy",
+			"name":"Dark energy",
+			"size":3,
+			"date":"",
+			"question":"What invisible agent is driving the accelerating expansion of the universe?",
+			"description":"In 1998, two teams of astrophysicists independently observed that the expansion of the universe appeared to be speeding up, driven by an invisible agent later dubbed “dark energy.” Both teams looked at light from exploding stars called supernovas. As starlight travels to Earth through expanding space-time, it gets stretched, becoming “redshifted,” or redder in color. The teams observed that supernovas with large redshifts were fainter, and thus farther away, than expected, implying that the universe is expanding faster now than it was long ago. Other observations have since confirmed this Nobel Prize-winning discovery. Dark energy can be thought of as a fluid with negative pressure, which makes it gravitationally repulsive. But what is it, and how does it fit into the laws of physics?",
+			"theories":[
+				"t_cosmologicalConstant",
+				"t_scalarField"
+			],
+			"children":[
+			]
+		},
+		{
+			"id":"cosConst",
+			"name":"Cosmological constant problem",
+			"size":6,
+			"date":"",
+			"question":"Why is the energy density of empty space so low?",
+			"description":"Because of quantum mechanical effects, the vacuum of empty space is not really empty, but roiling with particles of all energies that are constantly popping in and out of existence. All these effects should infuse the vacuum with a dense dose of energy, and yet the cosmic expansion rate suggests that the energy density of empty space is just 0.00000000000001 joules per cubic centimeter, 120 orders of magnitude lower than expected. To have such a tiny vacuum energy density — called the cosmological constant — it seems as if all the particles’ energies must precisely cancel out. How and why do quantum effects strike such a fine balance?",
+			"theories":[
+				"t_anthropicSelection",
+				"t_cyclicDilution"
+			],
+			"children":[
+				{
+					"id":"darkEnergy",
+					"overlap":8
+				},
+				{
+					"id":"hierProb",
+					"overlap":1
+				}
+			]
+		},
+		{
+			"id":"spaceTime",
+			"name":"Space-time",
+			"size":9,
+			"date":"",
+			"question":"What is the quantum nature of space and time?",
+			"description":"The universe appears to have three dimensions of space and one dimension of time. However, in small enough increments — less than a tenth of a trillionth of a trillionth of a trillionth of a meter — our familiar notions of space and time break down. The energy required to peer at such a small patch of space-time would collapse it into an inaccessible black hole. This and other paradoxes imply that space and time [emerge from some deeper quantum phenomenon]. So, what is the quantum nature of space-time, and how does it scale up to become the smooth geometric fabric we experience?",
+			"links":[
+				"https://www.quantamagazine.org/20150430-space-time-interactive/"
+			],
+			"theories":[
+				"t_quantumFoam",
+				"t_holography",
+				"t_amplituhedron"
+			],
+			"children":[
+				{
+					"id":"blackHole",
+					"overlap":5
+				}
+			]
+		},
+		{
+			"id":"quantGrav",
+			"name":"Quantum gravity",
+			"size":15,
+			"date":"",
+			"question":"What theory reconciles quantum mechanics and general relativity?",
+			"description":"Physicists have traced three of the four forces of nature — strong, weak and electromagnetic — to their origins in the form of elementary particles. Only gravity remains at large. Albert Einstein’s theory of general relativity casts gravity as a consequence of curvature in space and time, and this works perfectly on macroscopic scales. But in small enough increments, space and time lose meaning, and the laws of quantum mechanics — in which particles have no definite properties such as location, only probabilities — take over. A complete quantum theory of gravity would describe gravity’s origin in particles called gravitons and reveal how their behavior scales up to produce the space-time curves of general relativity. But unifying the laws of nature in this way has [proved immensely difficult].",
+			"links":[
+				"https://www.quantamagazine.org/20150508-what-happens-when-you-fall-into-a-black-hole/"
+			],
+			"theories":[
+				"t_stringTheory",
+				"t_loopQuantumGravity",
+				"t_asymptoticallySafeGravity",
+				"t_causalDynamicalTriangulations"
+			],
+			"children":[
+				{
+					"id":"spaceTime",
+					"overlap":8
+				},
+				{
+					"id":"blackHole",
+					"overlap":8
+				},
+				{
+					"id":"bigBang",
+					"overlap":6
+				},
+				{
+					"id":"cosConst",
+					"overlap":5
+				},
+				{
+					"id":"hierProb",
+					"overlap":1
+				},
+				{
+					"id":"grandU",
+					"overlap":5
+				}
+			]
+		},
+		{
+			"id":"hierProb",
+			"name":"Hierarchy problem",
+			"size":10,
+			"date":"",
+			"question":"Why is gravity more than 100 million trillion trillion times weaker than the other three fundamental forces?",
+			"description":"The force of gravity is more than 10^32 times weaker than the electromagnetic, strong and weak nuclear forces, an enormous disparity that appears in equations as a separation between the mass of the Higgs boson and the expected mass range of as-yet-undiscovered gravitational states of matter. The super-heavy gravitational states should intermingle with the Higgs boson quantum mechanically, contributing huge factors to the value of its mass. But the small mass of the Higgs boson implies that all these gargantuan factors have magically canceled out. The [search for a sensible explanation] for this improbably fine-tuned cancellation has occupied particle physicists for more than 30 years.",
+			"links":[
+				"https://www.quantamagazine.org/20150922-nima-arkani-hamed-collider-physics/"
+			],
+			"theories":[
+				"t_lowEnergySupersymmetry",
+				"t_largeExtraDimensions",
+				"t_littleHiggs",
+				"t_relaxion",
+				"t_anthropicSelection"
+			],
+			"children":[
+				{
+					"id":"darkMatter",
+					"overlap":4
+				},
+				{
+					"id":"strongCP",
+					"overlap":1
+				},
+				{
+					"id":"neutrinoMass",
+					"overlap":1
+				},
+				{
+					"id":"matterAnti",
+					"overlap":3
+				},
+				{
+					"id":"grandU",
+					"overlap":3
+				}
+			]
+		},
+		{
+			"id":"strongCP",
+			"name":"Strong CP problem",
+			"size":1,
+			"date":"",
+			"question":"Why do strong nuclear interactions run both forward and backward?",
+			"description":"If the laws of physics stay the same when particles are swapped with antiparticles and all become their mirror images, then they obey charge-parity, or CP, symmetry. (This also implies that they obey time-reversal symmetry, running both forward and backward in time.) Quarks and gluons interacting via the strong force are free to break CP symmetry, however: In the equations governing the strong interaction, an angle, θ, representing the amount of CP violation, can take on any value. But θ is small — possibly even zero — indicating that CP symmetry is respected in these strong interactions. Why?",
+			"theories":[
+				"t_pecceiQuinnMechanism",
+				"t_nelsonBarrMechanism"
+			],
+			"children":[
+				{
+					"id":"matterAnti",
+					"overlap":1
+				}
+			]
+		},
+		{
+			"id":"neutrinoMass",
+			"name":"Neutrino mass",
+			"size":2,
+			"date":"",
+			"question":"Why do neutrinos have mass?",
+			"description":"All three species of neutrinos in the Standard Model are the quantum equivalent of left-handed. This asymmetry implies that they should be massless, because massive particles travel slower than the speed of light and anything traveling faster than them would observe them as right-handed. However, in 1998, physicists discovered that neutrinos can spontaneously convert from one species to another, which is only possible if the particles have mass. The mass of neutrinos is at most one ten-thousandth that of electrons, and yet this mass proves that the Standard Model is incomplete. What physics beyond the Standard Model accounts for their mass?",
+			"theories":[
+				"t_seesawMechanism",
+				"t_extraDimensions"
+			],
+			"children":[
+			]
+		},
+		{
+			"id":"grandU",
+			"name":"Grand unification",
+			"size":5,
+			"date":"",
+			"question":"Do the three quantum forces unite into a single force at high energies?",
+			"description":"When extrapolated to high energies corresponding to those in the universe’s first fraction of a second, the curves representing the strengths of the electromagnetic, weak and strong forces nearly converge. (Adding supersymmetry to the equations makes the convergence exact — one of the main motivations for the theory.) Was there just one unified “electrostrong force” at this grand unified theory (GUT) scale? Did the mathematical form of the forces at more familiar energies — represented by the symmetry group SU(3) x SU(2) x U(1) — result from the breaking of a larger symmetry? Physicists hope to discover this higher symmetry group, as well as the missing particles that bring the strengths of the three forces exactly together at the GUT scale. (The fourth fundamental force, gravity, could unite with the others at a still higher energy called the Planck scale, corresponding to an even earlier moment — possibly the Big Bang.)",
+			"theories":[
+				"t_SU5",
+				"t_SO10",
+				"t_SU6_E6_E8",
+				"t_noGUTs"
+			],
+			"children":[
+				{
+					"id":"neutrinoMass",
+					"overlap":6
+				}
+			]
+		}
+	]
+}
