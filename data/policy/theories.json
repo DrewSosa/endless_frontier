@@ -1,5 +1,5 @@
 {
-	"policy_theories":[
+	"theories":[
 		{
 			"id":"t_institutes",
 			"name":"NIH Institutes",

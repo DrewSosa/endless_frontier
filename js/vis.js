@@ -533,6 +533,8 @@ var init = function(){
 					pairs = [],
 					e1,
 					e2;
+				console.log("n1: " + n1);
+				console.log("n2: " + n2);
 				//if length is >1, could either be because of quals or because a theory
 				//appears twice and its relationships don't change -- so account for both nodes
 				if(n1.length >1 && n2.length >1){
@@ -1626,13 +1628,14 @@ var init = function(){
 			}
 
 			function update_link(){
+				console.log("In the update_link function.");
 				console.log(this);
 				this.attr('d',function(d){
 					var arr = [],
 						src = {},
 						tar = {};
 
-
+					console.log("do we make the fisheye?");
 					d.source.fisheye = fisheye(d.source);
 					d.target.fisheye = fisheye(d.target);
 

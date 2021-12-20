@@ -1,7 +1,3 @@
-// var d3 = require("./d3")
-import * as d3 from 'd3'
-
-
 
 var init = function(){
 
@@ -280,33 +276,33 @@ var init = function(){
 				sets = ['topics','theories','theories_links'],
 				setv = 'theories_votes'
 				;
-			console.log("we are in the getData function.")
-			console.log("in the getData function AGAIN")
-			console.log(sets)
+
 			//push all JSON files into loading array
 			sets.forEach(function(d,i){
 				self.loading.push(d);
-				console.log("in the getData function AGAIN")
 			});
 
 			//push marker for WP vote count info into loading array
 			self.loading.push(setv);
 
 			//get all JSON files
-			console.log("we getting all JSON files.")
 			sets.forEach(function(d,i){
 				// i think this is where the data is accessed.
-				var str = '../data/' + d +'.json';
-				console.log("this should work....PLEASE")
-				console.log(str)
+				var str = '../data/policy/' + d +'.json';
+				console.log(str);
+				// editing this part. v4 version.
+				// d3.json(str).then(function(data){
+				// 	console.log("trying to print data")
+				// 	console.log(data)
+				// 	self.data_raw[d] = data[d];
+				// 	self.loadingManager(d,callback);
+				// });
+
 				d3.json(str,function(data){
-					console.log("trying to print data")
-					console.log(data)
 					self.data_raw[d] = data[d];
 					self.loadingManager(d,callback);
 				});
 			});
-
 			//get vote data
 
 			//Get our voting options via AJAX.
@@ -348,16 +344,19 @@ var init = function(){
 			});
 		},
 		processData:function(){
-			console.log("we are in the processData function.")
-			console.log(d)
+			// console.log(d)
 			var self = vis;
+			// #v3 version
 			var scale_size = d3.scale.linear()
 				.domain([1,15])
 				.range([5,25]);
+				// v4 version.
+			// // var scale_size = d3.scaleLinear()
+			// 	.domain([1,15])
+			// 	.range([5,25]);
 
 			//positioning functions
 			function posXY(d){
-				console.log("do we reach positioning?")
 				var posX,
 					posY,
 
@@ -409,7 +408,7 @@ var init = function(){
 			}
 
 			//create dictionary for topics
-
+			console.log(self.data_raw);
 			self.data_raw.topics.forEach(function(d){
 				d.size_scaled = scale_size(d.size);
 				self.topics[d.id] = d;
@@ -431,11 +430,13 @@ var init = function(){
 			});
 			//create dictionary for theories
 			self.data_raw.theories.forEach(function(d){
+				// theories = d;
 				self.theories[d.id] = d;
 				self.theories[d.id].topic = [];
 				self.theories[d.id]['t_parents']  = [];
 				self.theories[d.id]['t_children'] = [];
 				self.theories[d.id]['t_siblings'] = [];
+				// console.log(self.theories[d.id]);
 
 				d.description_HTML = d.description;
 
@@ -528,14 +529,15 @@ var init = function(){
 			});
 
 			//input theory data into t_links
-			console.log(self.data_raw)
-			console.log("I wanted to print data_raw")
 			self.data_raw.theories_links.forEach(function(d,i){
 				var n1 = self.t_nodes.filter(function(t){return t.id === d.source;}),
 					n2 = self.t_nodes.filter(function(t){return t.id === d.target;}),
 					pairs = [],
 					e1,
 					e2;
+
+				console.log("n1: " + n1);
+				console.log("n2: " + n2);
 				//if length is >1, could either be because of quals or because a theory
 				//appears twice and its relationships don't change -- so account for both nodes
 				if(n1.length >1 && n2.length >1){
@@ -559,6 +561,7 @@ var init = function(){
 					pairs.push([e1,e2]);
 				}
 				pairs.forEach(function(p){
+					console.log(p);
 					self.t_links.push({
 						'source':p[0],
 						'target':p[1],
@@ -568,6 +571,7 @@ var init = function(){
 						p[0].t_parents.push(p[1]);
 						p[1].t_children.push(p[0]);
 					} else if(d.type === 'sibling'){
+						console.log(d);
 						p[0].t_siblings.push(p[1]);
 						p[1].t_siblings.push(p[0]);
 					}
@@ -1629,12 +1633,14 @@ var init = function(){
 			}
 
 			function update_link(){
-
+				console.log("In the update_link function.");
+				console.log(this);
 				this.attr('d',function(d){
 					var arr = [],
 						src = {},
 						tar = {};
 
+					console.log("do we make the fisheye?");
 					d.source.fisheye = fisheye(d.source);
 					d.target.fisheye = fisheye(d.target);
 

@@ -377,31 +377,33 @@ var init = function(){
 				} else if(d.id === 'nationalLabs'){
 					posX = 508;
 					posY = 526;
-				} else if(d.id === 'darkEnergy'){
-					posX = 713;
-					posY = 122;
-				} else if(d.id === 'cosConst'){
-					posX = 716;
-					posY = 248;
-				} else if(d.id === 'spaceTime'){
-					posX = 553;
-					posY = 281;
-				} else if(d.id === 'quantGrav'){
-					posX = 617;
-					posY = 398;
-				} else if(d.id === 'hierProb'){
-					posX = 863;
-					posY = 434;
-				} else if(d.id === 'strongCP'){
-					posX = 969;
-					posY = 208;
-				} else if(d.id === 'neutrinoMass'){
-					posX = 776;
-					posY = 669;
-				} else if(d.id === 'grandU'){
-					posX = 696;
-					posY = 549;
-				} else{
+				}
+				// else if(d.id === 'darkEnergy'){
+				// 	posX = 713;
+				// 	posY = 122;
+				// } else if(d.id === 'cosConst'){
+				// 	posX = 716;
+				// 	posY = 248;
+				// } else if(d.id === 'spaceTime'){
+				// 	posX = 553;
+				// 	posY = 281;
+				// } else if(d.id === 'quantGrav'){
+				// 	posX = 617;
+				// 	posY = 398;
+				// } else if(d.id === 'hierProb'){
+				// 	posX = 863;
+				// 	posY = 434;
+				// } else if(d.id === 'strongCP'){
+				// 	posX = 969;
+				// 	posY = 208;
+				// } else if(d.id === 'neutrinoMass'){
+				// 	posX = 776;
+				// 	posY = 669;
+				// } else if(d.id === 'grandU'){
+				// 	posX = 696;
+				// 	posY = 549;
+				// }
+				else{
 					posX = centerX;
 					posY = centerY;
 				}
@@ -1626,13 +1628,14 @@ var init = function(){
 			}
 
 			function update_link(){
-				console.log("do we get to the update link funciton?");
+				console.log("In the update_link function.");
 				console.log(this);
 				this.attr('d',function(d){
 					var arr = [],
 						src = {},
 						tar = {};
 					console.log(d);
+					console.log("do we make the fisheye?");
 					d.source.fisheye = fisheye(d.source);
 					d.target.fisheye = fisheye(d.target);
 

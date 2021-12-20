@@ -1,0 +1,284 @@
+{
+	"theories":[
+		{
+			"id":"t_informationLoss",
+			"name":"Information loss",
+			"description":"The position originally espoused by Stephen Hawking is that the information gets destroyed along with the black hole, violating quantum mechanics. Information must be preserved in order for quantum mechanics to work －otherwise, the probabilities of different states of a system, given by a quantum mechanical “wave function,” won’t add up. Thus, information loss could mean the fundamental laws of physics must be reformulated."
+		},
+		{
+			"id":"t_firewalls",
+			"name":"Firewalls",
+			"description":"The [“firewall” argument], raised in 2012 by a group of physicists known as AMPS, asserts that there is no inside of a black hole; all the stuff that appears to fall in actually becomes part of the fiery shell of entangled particles on its horizon. Firewalls are a dramatic departure from the tenets of Einstein’s theory of general relativity, in which space-time curves steeply, but never suddenly stops.",
+			"links":[
+				"https://www.quantamagazine.org/20121221-alice-and-bob-meet-the-wall-of-fire/"
+			]
+		},
+		{
+			"id":"t_fuzzballs",
+			"name":"Fuzzballs",
+			"description":"The [fuzzball proposal], from string theorist Samir Mathur, replaces the singularity at the black hole’s center with a complicated configuration of strings (which are the basic building blocks of nature in string theory). When information appears to fall into a black hole, it actually becomes part of this fuzzball, which radiates the information back out.",
+			"links":[
+				"https://www.quantamagazine.org/20150623-fuzzballs-black-hole-firewalls/"
+			]
+		},
+		{
+			"id":"t_duality",
+			"name":"Duality",
+			"description":"The black hole interior might be constructed out of stuff that is far from the black hole — namely the particles that have radiated away. [The ER = EPR proposal] suggests that a wormhole connects each particle of this outgoing radiation to an entangled particle in the black hole interior. Meanwhile, the Horowitz-Maldacena approach links the interior and exterior by proposing that time flows backward inside black holes. The Papadodimas-Raju proposal holds that infalling objects are holographically encoded in the outgoing radiation.",
+			"links":[
+				"https://www.quantamagazine.org/20150424-wormholes-entanglement-firewalls-er-epr/"
+			]
+		},
+		{
+			"id":"t_leptogenesis",
+			"name":"Leptogenesis",
+			"description":"This popular hypothesis claims that heavier cousins of neutrinos filled the hot early universe. These would have decayed more often into antileptons than into leptons. (Leptons are the particle category that includes electrons.) Through high-temperature quantum tunneling events known as sphaleron processes, the surplus of antileptons would then have converted into the baryon surplus we see today. [Experimental searches are underway] for rare particle decays that would point to the existence of the heavy neutrinos.",
+			"links":[
+				"https://www.quantamagazine.org/20131010-neutrino-experiment-intensifies-effort-to-explain-matter-antimatter-asymmetry/"
+			]
+		},
+		{
+			"id":"t_electroweakBaryogenesis",
+			"name":"Electroweak baryogenesis",
+			"description":"The baryon surplus might have come about during a phase transition soon after the birth of the cosmos called electroweak symmetry breaking (EWSB), but only if EWSB was a first-order transition, akin to evaporating water. Bubbles of energy in a field permeating all of space, called the Higgs field, were needed to create two environments: the space outside the bubbles where antileptons could morph into baryons via quantum tunneling events called sphaleron processes, and the space inside the bubbles where they couldn’t. The mass of the Higgs boson suggests that the temperature of EWSB was too low for a first-order transition. However, if additional Higgs-like particles are found at higher energies, this theory becomes viable."
+		},
+		{
+			"id":"t_asymmetricDarkMatter",
+			"name":"Asymmetric dark matter",
+			"description":{
+				"matterAnti":"The universe contains roughly five parts dark matter for every part visible matter — similar abundances that may point to a connection between the two. Accordingly, this proposal tries to pass the buck by attributing the matter-antimatter asymmetry to an earlier asymmetry between the production of dark matter and dark antimatter, about which nothing is yet known.",
+				"darkMatter":"The universe contains roughly five parts dark matter for every part visible matter — similar abundances that may point to a connection between the two. If dark matter and visible matter do interact, then the same process that produced an excess of matter over antimatter in the early universe could also have generated an excess of dark matter over dark antimatter. This origin story predicts a mass for the dark matter particle that’s comparable to the mass of the proton, and suggests that dark matter should be detectable through rare interactions with visible matter."
+			}
+		},
+		{
+			"id":"t_planckGUT",
+			"name":"Planck/GUT-scale baryogenesis",
+			"description":"Baryogenesis may have occurred very near the beginning of time and at unreachably high energies known as the GUT (grand unified theory) scale or the Planck scale, where the Standard Model rules probably break down. Measurements of proton decay could someday provide a window onto the GUT-scale laws of physics, but if baryogenesis occurred at the Planck scale, we may never experimentally discover or verify the mechanism behind it."
+		},
+		{
+			"id":"t_affleckDine",
+			"name":"Affleck-Dine mechanism",
+			"description":"Supersymmetry posits the existence of a hypothetical twin for each known elementary particle. If the theory is correct, then during cosmic inflation, the supersymmetric partners of the known particles might have undergone CP-violating decays that produced an excess of baryons. [No supersymmetry particles have shown up] in searches at the Large Hadron Collider, but they could nonetheless exist at higher energies beyond the collider’s reach.",
+			"links":[
+				"https://www.quantamagazine.org/20121120-as-supersymmetry-fails-tests-physicists-seek-new-ideas/"
+			]
+		},
+		{
+			"id":"t_SU5",
+			"name":"SU(5)",
+			"description":"The SU(5) [symmetry group] includes SU(3) x SU(2) x U(1) as a subgroup. In models based on this symmetry group, all the known quarks and leptons are low-energy manifestations of only two fundamental particles that existed at the GUT scale. When the universe cooled past this scale, the SU(5) symmetry broke into SU(3) x SU(2) x U(1), introducing differences between the quarks and leptons. Like other GUT models, this one implies that quarks can become leptons and vice versa (albeit very rarely at low energies), an idea that is being tested in experimental searches for proton decay.",
+			"links":[
+				"https://www.quantamagazine.org/20150813-how-does-symmetry-shape-natures-laws/"
+			]
+		},
+		{
+			"id":"t_SO10",
+			"name":"SO(10)",
+			"description":"The [symmetries of the Standard Model], SU(3) x SU(2) x U(1), are part of the SU(5) symmetry group, and SU(5) is part of SO(10). Grand unification theories based on SO(10) hold that all the quarks and leptons were fused into a single fundamental particle at the GUT scale. Like other GUT models, SO(10) models imply that quarks can become leptons and vice versa (albeit very rarely at low energies), an idea that is being tested in experimental searches for proton decay.",
+			"links":[
+				"https://www.quantamagazine.org/20150813-how-does-symmetry-shape-natures-laws/"
+			]
+		},
+		{
+			"id":"t_SU6_E6_E8",
+			"name":"SU(6), E(6), E(8), etc.",
+			"description":"The SU(5) and SO(10) [symmetry groups] (and their Standard Model subgroup) can be embedded into even larger symmetric structures, some of which show up in string theory. Grand unified theories based on these symmetry groups provide plenty of room for theorists to incorporate new hypothetical particles and phenomena.",
+			"links":[
+				"https://www.quantamagazine.org/20150813-how-does-symmetry-shape-natures-laws/"
+			]
+		},
+		{
+			"id":"t_noGUTs",
+			"name":"No GUTs",
+			"description":"It’s possible that the three quantum forces do not unify at high energies, and that the curves representing their strengths cease to have meaning at such high energy scales; the appropriate description of the forces might transition from quantum field theory to [string theory or some other theory of quantum gravity].",
+			"links":[
+				"https://www.quantamagazine.org/20150218-string-theory-only-game-in-town/"
+			]
+		},
+		{
+			"id":"t_seesawMechanism",
+			"name":"Seesaw mechanism",
+			"description":"If the left-handed neutrinos of the Standard Model are their own antiparticles, then their tiny masses can be generated through an inverse relationship (like two sides of a seesaw) to the masses of much heavier hypothetical right-handed neutrinos. If these heavy neutrinos aren’t too heavy, they could also comprise dark matter. If they are enormous, and if they decayed shortly after the Big Bang, they might have been involved in [leptogenesis].",
+			"links":[
+				"https://www.quantamagazine.org/20131010-neutrino-experiment-intensifies-effort-to-explain-matter-antimatter-asymmetry/"
+			]
+		},
+		{
+			"id":"t_extraDimensions",
+			"name":"Extra dimensions",
+			"description":"If neutrinos are distinct from antineutrinos, then they can acquire mass through the Higgs mechanism, like the other particles in the Standard Model. But then why are neutrinos so much lighter than these other particles? One theory holds that the hypothetical right-handed partners of neutrinos move around in extra space-time dimensions that are curled up at each point in our 4-D reality. Much of their mass gets hidden in these space-time folds, which in turn renders the left-handed neutrinos lightweight."
+		},
+		{
+			"id":"t_largeExtraDimensions",
+			"name":"Large extra dimensions",
+			"description":"This proposal takes its cues from string theory and the notion that there may be extra, curled-up dimensions at each point in our four-dimensional reality. In 1998, Nima Arkani-Hamed, Savas Dimopoulos and Georgi Dvali showed that the existence of a millimeter-size extra spatial dimension could explain the apparent weakness of gravity compared to the other three forces. According to this idea, while the three quantum forces are localized in 3-D space, gravity spreads into the extra dimension and becomes diluted. The hypothesis has launched a search for signs of the extra dimensions, so far without results."
+		},
+		{
+			"id":"t_WIMPs",
+			"name":"WIMPs",
+			"description":"Most experimental [searches for dark matter] focus on WIMPs, or weakly interacting massive particles. In “thermal” models, dark matter filled the early universe, annihilating with its own antiparticles as the universe expanded and cooled; the dark matter that remained still exists today. This thermal picture predicts the particle’s mass to be around 1 TeV, consistent with a WIMP. In what’s known as the “WIMP miracle,” a particle in the same mass range also arises in many popular attempts to solve the hierarchy problem, such as supersymmetry. Searches for WIMPs over the past decade have so far come up empty, however, and the absence of evidence for supersymmetry from the Large Hadron Collider also slightly weakens their case.",
+			"links":[
+				"https://www.quantamagazine.org/20130718-in-the-hunt-for-dark-matter-promises-to-keep/"
+			]
+		},
+		{
+			"id":"t_sterileNeutrinos",
+			"name":"Sterile neutrinos",
+			"description":"Quarks, electrons and almost all other matter particles exist in both left-handed and right-handed forms. But the three known neutrino species are all left-handed. Many theorists hypothesize that neutrinos have as-yet-undiscovered right-handed counterparts — possibly heavier, less interactive particles that feel neither the strong force nor the weak force, called “sterile” neutrinos. Interacting with regular matter only gravitationally, sterile neutrinos could account for dark matter. Some particle astrophysicists claim to have detected a sterile neutrino decay signal, but the observation is highly uncertain. And even if these right-handed twins of known neutrinos do exist, they don’t necessarily have the requisite properties to be dark matter."
+		},
+		{
+			"id":"t_axions",
+			"name":"Axions",
+			"description":"An axion field can be thought of as a 3-D mattress with a spring at every point in space-time. First posited in 1977 to solve the strong CP problem, axion fields also arise in string theory and other attempts to extend the known laws of physics. The quantized vibrations in the mattress springs — particles called axions, which gravity assembles into galaxies along with all other matter —could comprise dark matter. Experimental searches for dark matter axions are underway."
+		},
+		{
+			"id":"t_selfInteractingDarkMatter",
+			"name":"Self-interacting dark matter",
+			"description":"Just as electrons are mutually repulsive and the strong force glues quarks together into protons and neutrons, dark matter particles might feel attracted or repelled by one another. These self-interactions would change dark matter’s resulting distribution in the cosmos. Models of [self-interacting dark matter] may capture the number, size and shape of dwarf galaxies better than some noninteracting models. However, some researchers bristle at the idea of adding extra complications to unknown particles.",
+			"links":[
+				"https://www.quantamagazine.org/20150820-the-case-for-complex-dark-matter/"
+			]
+		},
+		{
+			"id":"t_kaluzaKleinDarkMatter",
+			"name":"Kaluza-Klein dark matter",
+			"description":"In the 1920s, Theodor Kaluza and Oskar Klein tried to unify gravity and electromagnetism by adding a fifth dimension of space curled up at every point in the fabric of our 4-D reality. The theoretical benefits came at a cost: Each particle that propagates in the extra spatial dimension possesses an infinite tower of partner states. Could these “Kaluza-Klein partners” of the known particles — the lightest of which would have a thermal origin, mass and astrophysical signatures much like those of WIMPs — be the constituents of dark matter?"
+		},
+		{
+			"id":"t_quantumFoam",
+			"name":"Quantum foam",
+			"description":"Conceptually, the simplest hypothesis for quantizing space-time is to treat it as granular — John Wheeler dubbed it “quantum foam” — at the highest level of resolution. The trick is modeling the dynamics of the granular structure of space-time and showing how it scales up into the smooth, geometric form described by Einstein’s theory of general relativity. Loop quantum gravity and causal dynamical triangulations are two theoretical attempts to make this work; meanwhile, astrophysicists are seeking to observe effects of the granularity of space-time on the dispersion of cosmic particles."
+		},
+		{
+			"id":"t_holography",
+			"name":"Holography",
+			"description":"A deep but poorly understood principle known as holography suggests that the universe could be a four-dimensional, holographic projection of an underlying three-dimensional structure. Evidence for holography includes [a mathematical correspondence connecting geometric spaces and their surfaces]. Theorists are attempting to show how [the warped space-time fabric we experience might arise from quantum entanglement] between particles in a nongravitational, lower-dimensional description of reality. But this approach deals more with the emergence of space than of time. And so far, it is proving far easier to model holography in toy universes with Escher-like geometries than to show how it works in the actual universe.",
+			"links":[
+				"https://www.quantamagazine.org/20130701-signs-of-a-stranger-deeper-side-to-natures-building-blocks/",
+				"https://www.quantamagazine.org/20150428-how-quantum-pairs-stitch-space-time/"
+			]
+		},
+		{
+			"id":"t_amplituhedron",
+			"name":"Amplituhedron",
+			"description":"Theorists have discovered an intricate, multifaceted geometric object called [the “amplituhedron”] whose volume encodes the outcomes of certain particle interactions, dramatically simplifying calculations. The discovery suggests that the usual picture of particles colliding in space and time — and the probabilistic formulas for predicting the collision outcomes — are a construct, one that emerges as a consequence of some simpler, underlying geometry in which there is no sense of distance or time. Since this discovery, physicists and mathematicians have been collaborating to better understand the amplituhedron and its possible implications for the pursuit of a theory of quantum gravity.",
+			"links":[
+				"https://www.quantamagazine.org/20130917-a-jewel-at-the-heart-of-quantum-physics/"
+			]
+		},
+		{
+			"id":"t_cosmologicalConstant",
+			"name":"Cosmological constant",
+			"description":"Dark energy could be the cosmological constant — the energy infused in the vacuum of empty space. If it is, its pressure and energy density will have exactly opposite values, and the two quantities will remain in a constant ratio throughout cosmic history. Experiments like [the Dark Energy Survey are underway] to determine whether the pressure-density ratio is static or evolving.",
+			"links":[
+				"https://www.quantamagazine.org/20140918-finding-dark-energy-in-the-details/"
+			]
+		},
+		{
+			"id":"t_scalarField",
+			"name":"Scalar field",
+			"description":"A scalar field is an entity that has a numerical value at every point in the universe. Many cosmologists think the “inflaton” scalar field dominated the universe at its birth, driving its exponential expansion before decaying and disappearing. Similarly, dark energy could be a scalar field that is accelerating the expansion of the universe today. If so, the ratio of its pressure to its energy density would change over time — [a signature that can be observed] by experiments such as the Dark Energy Survey. Dark energy might be a type of scalar field [known as a chameleon] that disappears around massive objects, explaining why we haven’t observed its effects in terrestrial experiments.",
+			"links":[
+				"https://www.quantamagazine.org/20140918-finding-dark-energy-in-the-details/",
+				"https://www.quantamagazine.org/20150331-dark-energy-tested-on-a-tabletop/"
+			]
+		},
+		{
+			"id":"t_pecceiQuinnMechanism",
+			"name":"Peccei-Quinn mechanism",
+			"description":"In 1977, Roberto Peccei and Helen Quinn proposed that θ is not a constant, but a field whose value can evolve. The approximate symmetries of the field cause the θ parameter to become small or zero. Quantum fields always have associated particles, and so the field of the Peccei-Quinn mechanism predicts a new particle: the “axion,” which has come in handy as a theoretical solution for other cosmic mysteries. This is the most popular solution to the strong CP problem; though there’s no experimental evidence for it yet, searches for the axion are in progress."
+		},
+		{
+			"id":"t_nelsonBarrMechanism",
+			"name":"Nelson-Barr mechanism",
+			"description":"CP symmetry might be a true symmetry of nature, but one that is slightly broken in a way that keeps θ small. In 1984, Ann Nelson and Stephen Barr showed how this could work, but their mechanism requires the existence of a throng of heavy particles that may be too heavy to detect in experiments."
+		},
+		{
+			"id":"t_lowEnergySupersymmetry",
+			"name":"Low-energy supersymmetry",
+			"description":"Since the 1980s, the most popular solution to the hierarchy problem has been supersymmetry. It postulates a twin for each elementary particle: for the electron, a hypothetical “selectron,” for each quark, a “squark,” and so on. Particles and their “superpartners” contribute opposite terms to the mass of the Higgs boson. This should render the Higgs immune to the effects of heavy gravitational particles, since they’ll be nullified by the effects of their twins. For supersymmetry to solve the hierarchy problem, the superpartners cannot be much heavier than the known particles — otherwise their effects on the Higgs won’t cancel out. But [no evidence of low-mass superpartners] has turned up so far at the Large Hadron Collider.",
+			"links":[
+				"https://www.quantamagazine.org/20121120-as-supersymmetry-fails-tests-physicists-seek-new-ideas/"
+			]
+		},
+		{
+			"id":"t_littleHiggs",
+			"name":"Little Higgs",
+			"description":"This approach, developed by Nima Arkani-Hamed, Andrew Cohen and Howard Georgi in 2001, reproduces some of the virtues of extra-dimensional theories by adding, instead of new dimensions, new symmetries beyond those present in the Standard Model. These symmetries can be arranged in a way that causes quantum effects on the Higgs mass from other particles to approximately cancel out, helping to keep the Higgs mass small. Little Higgs models have been strained by data from the Large Hadron Collider, however, and could soon be ruled out."
+		},
+		{
+			"id":"t_relaxion",
+			"name":"Relaxion",
+			"description":"The [relaxion model], proposed by Peter Graham, David Kaplan and Surjeet Rajendran in 2015, explains the hierarchy between gravity and the other forces by recasting the Higgs mass as an evolving parameter that dynamically “relaxed” to its tiny value during the birth of the cosmos. In this model, the Higgs mass depends on the value of a hypothetical relaxion field that permeates space and time. The field can be pictured as a 3-D mattress with compressed springs. As the cosmos inflated, the springs relaxed, and as the energy dissipated, so did the Higgs mass — until it plunged past a critical value that switched on the mass of other elementary particles. This caused the relaxion field to stop changing, locking in the Higgs mass at its present value.",
+			"links":[
+				"https://www.quantamagazine.org/20150527-a-new-theory-to-explain-the-higgs-mass/"
+			]
+		},
+		{
+			"id":"t_anthropicSelection",
+			"name":"Multiverse",
+			"description":{
+				"hierProb":"If the Higgs boson were just a few times heavier and everything else stayed the same, protons could no longer assemble into atoms, and there would be no complex structures like stars or living beings. So [perhaps there are many universes], each with different combinations of constants, and we necessarily live in a universe with an unusually tiny Higgs mass that makes life possible. This hypothesis is seen as a bleak prospect by most physicists. Other universes in the “multiverse,” if they exist, lie beyond the boundaries of light communication. With no way to tell where our data point lies on the vast spectrum of possibilities in a multiverse, it becomes difficult to [construct multiverse-based arguments] about why our universe is the way it is.",
+				"cosConst":"A 1987 calculation showed that if the cosmological constant were just a few times larger and all else stayed the same, the universe would have expanded too quickly for galaxies, stars and habitable planets to form. So perhaps there are many universes with diverse constants, and we necessarily live in one with an unusually low vacuum energy density that makes life possible. Although it’s the leading solution to the cosmological constant problem, the “multiverse” is seen as a bleak prospect by most physicists. Other regions of the multiverse, if they exist, lie beyond the boundaries of light communication. With no way to tell where our data point lies on the vast spectrum of possibilities, it becomes difficult to [construct multiverse-based arguments] about why our universe is the way it is."
+			},
+			"links":
+			{
+				"hierProb":[
+					"https://www.quantamagazine.org/20130524-is-nature-unnatural/",
+					"https://www.quantamagazine.org/20141103-in-a-multiverse-what-are-the-odds/"
+				],
+				"cosConst":[
+					"https://www.quantamagazine.org/20141103-in-a-multiverse-what-are-the-odds/"
+				]
+			}
+		},
+		{
+			"id":"t_stringTheory",
+			"name":"String/M-theory",
+			"description":"String theory asserts that all elementary particles are actually tiny loops of energy, or “strings,” vibrating in different ways. One vibration mode describes the graviton, while a coherent state of many vibrating strings describes space-time curvature. Surprisingly, all consistent formulations of string theory are related through mathematical dualities, and, as Edward Witten discovered in 1995, all are manifestations of a mother theory dubbed “M-theory.” String/M-theory even connects via a duality to quantum field theory, the standard formalism of particle physics. These and [other intriguing hints] convince its practitioners the theory is correct. It will be very difficult to confirm or disprove, however, since the strings are too small to detect, and almost any observed feature of the universe jibes with the strings’ endless repertoire of tunes.",
+			"links":[
+				"https://www.quantamagazine.org/20150218-string-theory-only-game-in-town/"
+			]
+		},
+		{
+			"id":"t_loopQuantumGravity",
+			"name":"Loop quantum gravity",
+			"description":"Loop quantum gravity quantizes gravity using a modern reformulation of general relativity in which the gravitational field more closely resembles the fields associated with the other three forces. The theory predicts that space-time is made of discrete atoms described in terms of regions with quantized volumes separated by surfaces with quantized areas. These atoms can be visualized as nodes in a complex network, known as a spin network. The challenge is to show how or whether the spin network scales up to reproduce the smooth space-time geometry of classical general relativity."
+		},
+		{
+			"id":"t_asymptoticallySafeGravity",
+			"name":"Asymptotically safe gravity",
+			"description":"Proponents of this approach emphasize that quantizing gravity only becomes difficult when you try to calculate what gravitons are doing at extremely high energies (or, equivalently, small distances), where calculations diverge to infinity. Asymptotically safe gravity, an idea first floated by Steven Weinberg, says this high-energy situation may not be a problem after all; there could be a conspiracy of effects, hidden from us at low energies, that causes gravity to become weaker than expected when extrapolated to high energies. This makes calculations finite instead of divergent, but it skirts some of the conceptual problems of quantum gravity, such as the black hole information paradox."
+		},
+		{
+			"id":"t_causalDynamicalTriangulations",
+			"name":"Causal dynamical triangulations",
+			"description":"This fledgling approach to quantum gravity, developed by Renate Loll and colleagues in the early 2000s, replaces infinitely smooth space-time with a finite lattice of allowed particle paths. These paths “triangulate” curved space-time much as flat triangles can be pieced together to form a geodesic dome. The lattice dynamically evolves, but the time directions of adjacent trianglelike lattice elements must always agree, preserving causality. Summing all possible causal configurations of the lattice, and of all possible spatial geometries, offers a way of calculating the probabilistic interactions between particles. Also, simulations suggest that this theory recovers classical general relativity at large scales."
+		},
+		{
+			"id":"t_cyclicDilution",
+			"name":"Cyclic dilution",
+			"description":"If the universe is eternally expanding and contracting, it becomes possible to imagine quantities changing on time scales longer than 14 billion years. The cosmologists Neil Turok and Paul Steinhardt have constructed a cyclic model in which the cosmological constant started out enormous (as expected from quantum mechanical calculations), but very slowly decayed over many cycles. The lower the energy density, the more cycles there are. So, in this model, most of the history of the universe occurs during cycles when the energy infusing the vacuum is small, as observed."
+		},
+		{
+			"id":"t_cosmicInflation",
+			"name":"Cosmic inflation",
+			"description":"Around 1980, Soviet and American cosmologists separately proposed what is still [by far the most popular fix] for the Big Bang model: According to the cosmic inflation hypothesis, the universe was born when an enormous upsurge of energy beset a tiny patch of an “inflaton” field. This energy exerted a repulsive force, causing the patch to expand like the surface of an inflating balloon. The exponential growth spurt lasted only about 10^-35 seconds before the energy became diluted, but this was long enough to produce the huge, smooth bubble of space-time we see today. Inflation’s surest fingerprints are subtle ripples in space-time called gravitational waves. After [a false alarm in 2014], the [search for gravitational waves] continues.",
+			"links":[
+				"https://www.quantamagazine.org/20150130-joint-dust-analysis-deflates-big-bang-signal/",
+				"https://www.quantamagazine.org/20140921-big-bang-signal-could-all-be-dust-planck-says/",
+				"https://www.quantamagazine.org/20150612-in-theory-cosmic-inflation/"
+			]
+		},
+		{
+			"id":"t_eternalInflation",
+			"name":"Eternal inflation",
+			"description":"Many proponents of cosmic inflation say it almost inevitably begets an infinite number of universes. This is because inflation, once it starts, never seems to stop completely. In a region where it does stop (through the decay of the inflaton field), space and time gently swell into a bubblelike universe like ours. Everywhere else, space-time continues to expand exponentially, bubbling forever. Thus, eternal inflation casts our universe as a single bubble in an endless multiverse sea."
+		},
+		{
+			"id":"t_cyclicUniverse",
+			"name":"Cyclic universe",
+			"description":"In cyclic scenarios, the universe executes an eternal series of expansions and contractions. Any unevenness that develops as the cosmos expands gets compressed as it contracts. The slate is wiped clean for each cosmic rebirth, which accounts for the exceptional uniformity observed early on in this latest iteration. Proponents say cyclic universe models avoid the question of initial conditions (i.e., what triggered inflation?) and the philosophical pitfalls of eternal inflation and the multiverse. But these models have few subscribers at present. They hinge on the shaky idea that the universe will bounce, rather than crunch, each time it shrinks to a point."
+		}
+	]
+}
