@@ -3,10 +3,7 @@
 		{
 			"id":"t_institutes",
 			"name":"NIH Institutes",
-			"description":{
-				"nih":"To improve the U.S. government’s capabilities to speed research that can improve the health of all Americans, President Biden is proposing the establishment of the Advanced Research Projects Agency for Health (ARPA-H). Included in the President’s FY2022 budget as a component of the National Institutes of Health (NIH) with a requested funding level of $6.5B available for three years, ARPA-H will be tasked with building high-risk, high-reward capabilities (or platforms) to drive biomedical breakthroughs—ranging from molecular to societal—that would provide transformative solutions for all patients.",
-				"arpa":"To improve the U.S. government’s capabilities to speed research that can improve the health of all Americans, President Biden is proposing the establishment of the Advanced Research Projects Agency for Health (ARPA-H). Included in the President’s FY2022 budget as a component of the National Institutes of Health (NIH) with a requested funding level of $6.5B available for three years, ARPA-H will be tasked with building high-risk, high-reward capabilities (or platforms) to drive biomedical breakthroughs—ranging from molecular to societal—that would provide transformative solutions for all patients."
-			}
+			"description":"To improve the U.S. government’s capabilities to speed research that can improve the health of all Americans, President Biden is proposing the establishment of the Advanced Research Projects Agency for Health (ARPA-H). Included in the President’s FY2022 budget as a component of the National Institutes of Health (NIH) with a requested funding level of $6.5B available for three years, ARPA-H will be tasked with building high-risk, high-reward capabilities (or platforms) to drive biomedical breakthroughs—ranging from molecular to societal—that would provide transformative solutions for all patients."
 		},
 		{
 			"id":"t_commonFund",
