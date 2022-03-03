@@ -453,7 +453,7 @@ var init = function(){  //init will return a list of functions :)
                     d.children.forEach(function(_d){
                         self.links.push({
                             'source': i,
-                            'target': d3.keys(self.topics).indexOf(_d.id),
+                            'target': Object.keys(self.topics).indexOf(_d.id),
                             'value': _d.overlap
                         });
                     })
@@ -595,7 +595,7 @@ var init = function(){  //init will return a list of functions :)
 
             // For each topic, collect its corresponding theories in alphabetical order.
             var alpha = [],
-                top_arr = d3.keys(self.topics).sort(); // get a list of all topics sorted.
+                top_arr = Object.keys(self.topics).sort(); // get a list of all topics sorted.
 
                 top_arr.forEach(function(d){
                 //create a topic object.
@@ -704,7 +704,30 @@ var init = function(){  //init will return a list of functions :)
                 return d.first ? '0px' : d.topic ? topicPad +'px' : theoryPad +'px';
             })
             .html(function(d){ return d.name; });
+            col_01.exit().remove();
 
+			col_02 = d3.select('#idxBox #list .col_02')
+				.selectAll('div.theoryLink')
+				.data(alpha.slice(split_01,split_02));
+			col_02.enter().append('div')
+				.classed('theoryLink',true);
+			col_02
+				.classed('topic',function(d){
+					return d.topic;
+				})
+				.each(function(d,i){
+					d.first = i === 0;
+				})
+				.style('font-size',function(d){
+					return d.topic ? topicFont +'px' : theoryFont +'px';
+				})
+				.style('margin-left',function(d){
+					return d.topic ? '0px' : topicFont +'px';
+				})
+				.style('padding-top',function(d,i){
+					return d.first ? '0px' : d.topic ? topicPad +'px' : theoryPad +'px';
+				})
+				.html(function(d){ return d.name; });
             // do the same for col 2 & 3.
             col_02
 				.on('click',function(d){
@@ -741,14 +764,19 @@ var init = function(){  //init will return a list of functions :)
 
             // sets the line for???
             // unknown.
-            var line_linear = d3.svg.line()
+            /* important thing to to note here. Interpolate was deprecated in v4.
+                Now the line generator takes a curve to define the interpolation:
+            https://stackoverflow.com/questions/40198378/interpolate-is-not-a-function
+
+            */
+            var line_linear = d3.line()
                 .x(function(d) { return d.x; })
                 .y(function(d) { return d.y; })
-                .interpolate('linear');
-            var line_hull = d3.svg.line()
+                .curve(d3.curveBasis);
+            var line_hull = d3.line()
                 .x(function(d) { return d.x; })
                 .y(function(d) { return d.y; })
-                .interpolate('linear-closed');
+                .curve(d3.curveBasis);
 
 
             /* Fish Eye - https://bost.ocks.org/mike/fisheye/
@@ -761,7 +789,7 @@ var init = function(){  //init will return a list of functions :)
                 .radius(self.h/2) // set radius to half
                 .distortion(1); // go back and look at what this does later.
 
-            var zoom = d3.behaviour.zoom();
+            // var zoom = d3.behaviour.zoom();
 
             //initialize the force graph.
             var force = d3.layout.force()
@@ -809,7 +837,939 @@ var init = function(){  //init will return a list of functions :)
                 c_rad = f_rad,
                 t_pad = 18;
 
+            // not sure what the on event does.
+            self.svg
+                .on('click', function(){
+                    // initialize the mouse object and grab its location.
+                    var mouse = d3.mouse(this),
+                        mX = mouse[0] - self.topicTransformDist.x,
+                        mY = mouse[1] - self.topicTransformDist.y;
+                        pX = d3.event.pageX - self.topicTransformDist.x,
+                        pY = d3.event.pageY - self.topicTransformDist.y;
+                    //initialize focus object, which holds the topic closest to the mouse.
+                    var focus = getClosest(mX, mY), // getclosest returns a topic object.
+                        t_focus = self.topicFocus ?  //set the topic to focus on.
+                            getClosestTheory(mX, mY, self.topicFocus): getClosestTheory(mY, mY),
+                        t_focusDistance = self.topicFocus ? self.focusDistance/1.5 : self.focusDistance/3;
+
+                        // if the idx button is visible, hide it.
+                    if (self.idxVisible){
+                        hideIdxBox();
+                    }
+                    // if the idx button is not visible
+                    else{
+                        //if clicking into topic from zoomed-out view
+						if(!self.topicFocus && focus.distance <self.focusDistance){
+							self.topicFocus = focus.id;
+							topicFocus(focus.id);
+							topicView(focus.id);
+							theoryUnfocus();
+
+						//if clicking to a different topic from a selected topic -- catch a theory interception
+						} else if(self.topicFocus && focus.distance <self.focusDistance && self.topicFocus !== focus.id){
+
+							//if close enough to a theory, select that theory
+							if(t_focus.distance <t_focusDistance){
+								self.theoryFocus = t_focus.id;
+								theoryLock(t_focus,true);
+
+							//if not, refocus on new topic
+							} else{
+								self.topicFocus = focus.id;
+								topicFocus(focus.id);
+								topicView(focus.id);
+								theoryUnfocus();
+							}
+
+						//if clicking on the selected topic
+						} else if(self.topicFocus && focus.distance <self.focusDistance && self.topicFocus === focus.id){
+
+							//if clicking on a theory when no theory is selected
+							if(!self.theoryFocus && t_focus.distance <t_focusDistance){
+								self.theoryFocus = t_focus.id;
+								theoryLock(t_focus,true);
+
+							//if clicking on a theory that's different from the selected theory
+							} else if(self.theoryFocus && t_focus.distance <t_focusDistance && self.theoryFocus !== t_focus.id){
+								self.theoryFocus = t_focus.id;
+								theoryLock(t_focus,true);
+
+							//if clicking on the selected theory
+							} else if(self.theoryFocus && t_focus.distance <t_focusDistance && self.theoryFocus === t_focus.id){
+								theoryUnfocus();
+
+							//if clicking on the topic but not close enough to a theory
+							} else{
+							}
+
+						//if clicking elsewhere on the map
+						} else{
+							topicUnview(true);
+						}
+                        t_nodes
+							.classed('spotlight',function(d){
+								return self.topicFocus && d.topic === self.topicFocus;
+							})
+							.attr('r',function(d){
+								if(self.topicFocus && d.topic === self.topicFocus){
+									d.radius = c_rad;
+								} else{
+									d.radius = t_rad;
+								}
+								return d.radius;
+							});
+					}
+				}) //when the mouse moves, update the mouse position and the focus.
+				.on('mousemove',function(){
+
+					if(!self.theoryFocus){
+
+						var mouse = d3.mouse(this),
+							mX = mouse[0] -self.topicTransformDist.x,
+							mY = mouse[1] -self.topicTransformDist.y,
+							pX = d3.event.pageX -self.topicTransformDist.x,
+							pY = d3.event.pageY -self.topicTransformDist.y;
+						var focus = getClosest(mX,mY),
+							t_focus = self.topicFocus ? getClosestTheory(mX,mY,self.topicFocus) : getClosestTheory(mX,mY),
+							t_focusDistance = self.topicFocus ? self.focusDistance/1.5 : self.focusDistance/3;
+
+						fisheye.focus(mouse);
+
+						//highlight closest topic
+						if(focus.distance <self.focusDistance){
+							self.topicHighlight = focus.id;
+							topicFocus(focus.id);
+						} else if(!self.topicFocus){
+							topicUnfocus();
+						}
+
+						//highlight closest theories
+						if(	!self.topicFocus
+							&& focus.distance <self.focusDistance
+							&& t_focus.distance <t_focusDistance
+							//&& t_focus.topic === focus.id
+						){
+							theoryFocus(t_focus);
+						} else if(self.topicFocus
+							&& t_focus.distance <t_focusDistance
+							//&& t_focus.topic === focus.id
+							&& t_focus.topic === self.topicFocus
+						){
+							theoryFocus(t_focus);
+						} else{
+							theoryUnfocus();
+						}
+
+						links.call(update_link);
+						hulls.call(update_hull);
+						labelsG.call(update_label);
+
+						t_nodes
+							.classed('spotlight',function(d){
+								return self.topicFocus && d.topic === self.topicFocus;
+							})
+							.classed('semihighlight',function(d){
+								return d.topic === focus.id && focus.distance <self.focusDistance && (self.topicFocus && d.topic !== self.topicFocus);
+							})
+							.classed('highlight',function(d){
+								return d.topic === focus.id && (focus.distance <self.focusDistance || self.topicFocus && d.topic === self.topicFocus);
+							})
+							.attr('r',function(d){
+								if(!self.topicFocus && d.topic === focus.id && focus.distance <self.focusDistance){
+									d.radius = f_rad;
+								} else if(self.topicFocus && d.topic === self.topicFocus){
+									d.radius = c_rad;
+								} else{
+									d.radius = t_rad;
+								}
+								return d.radius;
+							});
+
+					//still carry out theory sub-highlighting within selected topic
+					} else if(self.topicFocus && self.theoryFocus){
+
+						var mouse = d3.mouse(this),
+							mX = mouse[0] -self.topicTransformDist.x,
+							mY = mouse[1] -self.topicTransformDist.y,
+							pX = d3.event.pageX -self.topicTransformDist.x,
+							pY = d3.event.pageY -self.topicTransformDist.y;
+						var focus = getClosest(mX,mY),
+							t_focus = getClosestTheory(mX,mY),
+							t_focusDistance = self.topicFocus ? self.focusDistance/1.5 : self.focusDistance/3;
+
+						fisheye.focus(mouse);
+
+						//highlight closest topic
+						if(focus.distance <self.focusDistance){
+							self.topicHighlight = focus.id;
+							topicFocus(focus.id);
+						} else if(!self.topicFocus){
+							topicUnfocus();
+						}
+
+						links.call(update_link);
+						hulls.call(update_hull);
+						labelsG.call(update_label);
+
+						if(	t_focus.distance <t_focusDistance && t_focus.topic === self.topicFocus){
+							t_nodes
+								/*.each(function(d){
+									d.fixed = d.id === t_focus.id;
+								})*/
+								.classed('semihov',function(d){
+									return d.id === t_focus.id;
+								});
+							t_labelsG
+								.classed('semihov',function(d){
+									return d.id === t_focus.id;
+								});
+						} else{
+							t_nodes.classed('semihov',false);
+							t_labelsG.classed('semihov',false);
+						}
+					}
+				});
+
+        //TOPICS
+        topics = self.svgG.selectAll('g.topics')
+            .data([force]);
+        topics.enter().append('g')
+            .classed('topics',true);
+        topics.exit().remove();
+        links = topics.selectAll('path.link')
+            .data(function(d){ return d.links(); })
+        links.enter().append('path')
+            .classed('link',true);
+        links
+            .attr('class',function(d){
+                return 'link ' +d.source.id +' ' +d.target.id;
+            });
+        links.exit().remove();
+        hulls = topics.selectAll('path.hull')
+            .data(function(d){ return d.nodes(); })
+            ;
+        hulls.enter().append('path')
+            .classed('hull',true);
+        hulls
+            .attr('class',function(d){
+                return 'hull ' +d.id;
+            })
+            .attr('vector-effect','non-scaling-stroke')
+            ;
+        hulls.exit().remove();
+
+        //THEORIES -- what does this do?
+        theories = self.svgG.selectAll('g.theories')
+            .data([t_force]);
+        theories.enter().append('g')
+            .classed('theories',true);
+        theories.exit().remove();
+        t_links = theories.selectAll('path.t_link')
+            .data(function(d){ return d.links(); });
+        t_links.enter().append('path')
+            .classed('t_link',true);
+        t_links.exit().remove();
+        t_nodes = theories.selectAll('circle.t_node')
+            .data(function(d){ return d.nodes(); })
+            ;
+        t_nodes.enter().append('circle')
+            .classed('t_node',true);
+        t_nodes
+            .attr('class',function(d){
+                return d.id +' t_node';
+            })
+            .attr('r',function(d){
+                d.radius = t_rad;
+                return d.radius;
+            });
+        t_nodes.exit().remove();
+        t_labelsG = theories.selectAll('g.t_labelsG')
+            .data(function(d){ return d.nodes(); })
+            ;
+        t_labelsG.enter().append('g')
+            .classed('t_labelsG',true);
+        t_labelsG.exit().remove();
+        t_labels = t_labelsG.selectAll('text.t_label')
+            .data(function(d,i){ return [d]; });
+        t_labels.enter().append('text')
+            .classed('t_label',true);
+        t_labels
+            .attr('x',9)
+            .attr('y',4)
+            .text(function(d){
+                return d.name;
+            });
+        t_labels.exit().remove();
+        t_counts = t_labels.selectAll('tspan.t_count')
+            .data(function(d,i){ return [d]; });
+        t_counts.enter().append('tspan')
+            .classed('t_count',true);
+        t_counts
+            .classed('hide',true)
+            .attr('x',function(d){
+                var parentW = this.parentNode.getBBox().width;
+                return parentW +15;
+            })
+            .attr('y',4)
+            .style('font-size',8*self.adjust +'px')
+            .text(function(d){
+                var count = d.WP ? d.WP.count : 0;
+                return '(' +count +')';
+            });
+        t_counts.exit().remove();
+
+        //LABELS
+        labelContainer = self.svgG.selectAll('g.labelContainer')
+            .data([Object.keys(self.topics)]);
+        labelContainer.enter().append('g')
+            .classed('labelContainer',true);
+        labelContainer.exit().remove();
+        labelsG = labelContainer.selectAll('g.labelsG')
+            .data(function(d){ return d; });
+        labelsG.enter().append('g')
+            .classed('labelsG',true);
+        labelsG
+            .style('text-anchor',function(d){
+                return self.topics[d].x <self.w/2 ? 'end' : 'start';
+            });
+        labelsG.exit().remove();
+        labels = labelsG.selectAll('text.label')
+            .data(function(d){ return [d]; });
+        labels.enter().append('text')
+            .classed('label',true);
+        labels
+            .text(function(d){
+                return self.topics[d].name;
+            });
+        labels.exit().remove();
+
+        /* funny thing is that in JavaScript, functions are hoisted
+        which means you can invoke (call) a function before or after it has been defined.
+        This doesn't not work for function expressions, aka anonymous functions.
+        */
+        function topicFocus(_id){
+            //only highlight if closest to mouse
+            hulls
+                .classed('highlight',function(d,i){ // highlight.
+                    return d.id === _id;
+                })
+                .classed('semihighlight',function(d,i){ //highlight a little if it close enough, but not main focus.
+                    return d.id === _id && (self.topicFocus && d.id !== self.topicFocus);
+                })
+                .classed('unhighlight',function(d,i){ //
+                    return d.id !== _id;
+                });
+            labelsG //same execerise for the labels.
+                .classed('highlight',function(d,i){
+                    return self.topics[d].id === _id;
+                })
+                .classed('semihighlight',function(d,i){
+                    return self.topics[d].id === _id && (self.topicFocus && self.topics[d].id !== self.topicFocus);
+                })
+                .classed('unhighlight',function(d,i){
+                    return self.topics[d].id !== _id;
+                });
+        }
+        function topicUnfocus(){
+            self.topicFocus = null;
+            self.topicHighlight = null;
+
+            hulls
+                .classed('highlight',false)
+                .classed('semihighlight',false)
+                .classed('unhighlight',false);
+            labelsG
+                .classed('highlight',false)
+                .classed('semihighlight',false)
+                .classed('unhighlight',false);
+            /*self.hBox
+                .classed('highlight',false)
+                .html('');*/
+        }
+
+        function topicView(_id){
+
+            var ctr = {'x':self.w/1.75,'y':self.h/2};
+
+            self.xBack.classed('show',true);
+
+            links.call(update_link);
+            hulls.call(update_hull);
+            labelsG.call(update_label);
+
+            self.hBox
+                .classed('highlight',true)
+                .property('scrollTop',0)
+                /*.html(function(d){
+                    var quest = self.topics[_id].question,
+                        descrip = self.topics[_id].description_HTML;
+                    return '<div class="descrip q">' +quest +'</div>' +'<div class="descrip body">' +descrip +'</div>';
+                })*/
+                ;
+            self.hBoxQ
+                .html(function(d){
+                    return self.topics[_id].question;
+                });
+            self.hBoxBod
+                .html(function(d){
+                    return self.topics[_id].description_HTML;
+                });
+            self.titleCred.classed('show',false);
+
+            self.svgG
+                .transition()
+                .duration(self.animTime)
+                .attr('transform',function(){
+                    var scaleTo = 1.5,
+                        hull = d3.select('.hull.' +_id).node().getBBox(),
+                        zoom_X = ctr.x -(hull.x +hull.width/2)*scaleTo,
+                        zoom_Y = ctr.y -(hull.y +hull.height/2)*scaleTo
+                        ;
+
+                    //self.topicTransformDist.hull = hull;
+                    self.topicTransformDist.x = zoom_X;
+                    self.topicTransformDist.y = zoom_Y;
+                    self.topicTransformDist.zoom = scaleTo;
+                    return 'translate(' +zoom_X +',' +zoom_Y +')scale(' +scaleTo +')';
+                });
+
+            self.topicLabel
+                .html(function(){
+                    return '<span>' +self.topics[_id].name +'</span>';
+                })
+                .classed('topicView',true);
+
+            hulls.classed('focus',function(d){
+                return d.id === _id;
+            });
+            labelsG.classed('topicView',function(d){
+                return d === _id;
+            });
+
+            t_counts
+                .classed('hide',function(d){
+                    return d.topic !== self.topicFocus;
+                });
+
+            //set all child theories to hover around the center of the path
+            self.t_nodes.forEach(function(d){
+                if(d.topic === _id){
+                    var hull = d3.select('.hull.'+d.topic).node().getBBox();
+                    d.focus.x = hull.x +hull.width/2;
+                    d.focus.y = hull.y +hull.height/2;
+                } else{
+                    d.focus.x = null;
+                    d.focus.y = null;
+                }
+            });
+        }
+
+        function topicUnview(_trans){
+
+            var ctr = {'x':self.w/2,'y':self.h/2},
+                _id = self.topicFocus;
+
+            self.xBack.classed('show',false);
+
+            self.titleCred.classed('show',true);
+
+            self.topicFocus = null;
+            self.topicHighlight = null;
+
+            t_counts.classed('hide',true);
+
+            //reset set focus x/y of associated theories
+            self.t_nodes.forEach(function(d,i){
+                d.focus.x = null;
+                d.focus.y = null;
+            });
+
+            links.call(update_link);
+            hulls.call(update_hull);
+            labelsG.call(update_label);
+
+            hulls
+                .classed('focus',false)
+                .classed('highlight',false)
+                .classed('unhighlight',false);
+            labelsG
+                .classed('highlight',false)
+                .classed('unhighlight',false);
+            self.hBox
+                .classed('highlight',false)
+                //.html('')
+                ;
+            self.hBoxQ.html('');
+            self.hBoxBod.html('');
+
+            self.svgG
+                .transition()
+                .duration(self.animTime)
+                .attr('transform',function(){
+                    self.topicTransformDist.x = 0;
+                    self.topicTransformDist.y = 0;
+                    return 'translate(0,0)scale(' +self.scaleFactor +')';
+                });
+
+            self.topicLabel.classed('topicView',false);
+            labelsG.classed('topicView',false);
+
+            theoryUnfocus();
+        }
+
+        function theoryFocus(_d,_time){
+
+            theoryUnfocus();
+
+            var theory = _d,
+                time   = _time !== null && _time >=0 ? _time : 0.5;
+
+            //after brief pause, implement full lock
+            //if in topic focus, no delay
+            if(time >0){
+                self.fadeInTimeout = setTimeout(function(){
+                    theoryLock(theory);
+                },self.fadeInTime*time);
+            } else{
+                theoryLock(theory);
+            }
+
+            t_nodes
+                /*.each(function(d){
+                    d.fixed = d.id === theory.id && self.topicFocus && d.topic === self.topicFocus;
+                })*/
+                .classed('hov',function(d){
+                    return d.id === theory.id && d.topic === theory.topic;
+                })
+                .classed('semihov',false)
+                ;
+            t_labelsG
+                .classed('focusHov',function(d){
+                    return d.id === theory.id && d.topic === theory.topic;
+                })
+                .classed('semihov',false)
+                ;
+        }
+
+        function theoryUnfocus(){
+
+            clearTimeout(self.fadeInTimeout);
+
+            self.theoryFocus = null;
+
+            t_nodes.classed('semihov',false);
+            t_labelsG.classed('semihov',false);
+
+            theoryUnlock();
+        }
+
+        function theoryLock(_t,_showDescrip){
+
+            var theory = _t;
+
+            theory.count = theory.WP ? theory.WP.count : 0;
+            theory.voted = theory.WP ? theory.WP.voted : false;
+
+            descrip = typeof(theory.description) === 'object' ? theory.description_HTML[theory.topic] : theory.description_HTML;
+
+            if(_showDescrip){
+
+                self.t_hBox
+                    .style('display',function(d){
+                        return self.topicFocus && theory.topic === self.topicFocus ? 'block' : 'none';
+                    })
+                    //.html('<div class="descrip t_name">' +theory.name +'</div><div class="descrip t_vote '+(theory.voted ? 'voted' : '') +'">&nbsp;' +theory.count +'</div>' +'<div class="descrip t_body">' +descrip +'</div>')
+                    .style('opacity',1);
+                self.t_hBoxName
+                    .html(function(d){
+                        return theory.name;
+                    });
+                self.t_hBoxVote
+                    .classed('voted',function(d){
+                        return theory.voted;
+                    })
+                    .html(function(d){
+                        return ' ' +theory.count +' votes';
+                    });
+                self.t_hBoxBody
+                    .html(function(d){
+                        return descrip;
+                    });
+            }
+
+            t_nodes
+                /*.each(function(d){
+                    d.fixed = d.id === theory.id && self.topicFocus && d.topic === self.topicFocus;
+                })*/
+                .classed('hov',function(d){
+                    return d.id === theory.id && d.topic === theory.topic;
+                })
+                .classed('unhov',function(d){
+                    return d.id !== theory.id || d.topic !== theory.topic;
+                })
+                .classed('subhov',function(d){
+                    var show =
+                    (		(theory.t_children.indexOf(d) >-1)
+                        ||	(theory.t_parents.indexOf(d) >-1)
+                        ||	(theory.t_siblings.indexOf(d) >-1)
+                    );
+                    return show;
+                })
+                .classed('semihov',false)
+                ;
+            t_links
+                .classed('show',function(d){
+                    return 	(d.source.id === theory.id && d.source.topic === theory.topic)
+                    || 		(d.target.id === theory.id && d.target.topic === theory.topic);
+                });
+            t_labelsG
+                .classed('show',function(d){
+                    var show =
+                    (		(theory.t_children.indexOf(d) >-1)
+                        ||	(theory.t_parents.indexOf(d) >-1)
+                        ||	(theory.t_siblings.indexOf(d) >-1)
+                    );
+                    return show;
+                })
+                .classed('focusHov',function(d){
+                    return d.id === theory.id && d.topic === theory.topic;
+                })
+                .classed('semihov',false);
+        }
+
+        function theoryUnlock(){
+
+            self.theoryFocus = null;
+
+            //remove description box
+            self.t_hBox
+                //.html('')
+                .transition()
+                .duration(0)
+                .style('opacity',0)
+                .style('display','none');
+            self.t_hBoxName.html('');
+            self.t_hBoxVote
+                .html('')
+                .classed('voted',false);
+            self.t_hBoxBody.html('');
+
+            t_nodes
+                /*.each(function(d){
+                    d.fixed = false;
+                })*/
+                .classed('hov',false)
+                .classed('unhov',false)
+                .classed('subhov',false)
+                .classed('spotlight',false)
+                .attr('r',function(d){
+                    d.radius = t_rad;
+                    return d.radius;
+                });
+            t_links.classed('show',false);
+            t_labelsG
+                .classed('hov',false)
+                .classed('show',false)
+                .classed('focusHov',false);
+        }
+
+            //bring up theory index screen
+            function showIdxBox(){
+                self.idxVisible = true;
+                self.idxBox.classed('show',true);
+                self.idx.classed('on',true);
+            }
+
+            function hideIdxBox(){
+                self.idxVisible = false;
+                self.idxBox.classed('show',false);
+                self.idx.classed('on',false);
+            }
+
+            //return closest hull to x,y coords
+			function getClosest(_x,_y){
+				var distances = [],
+					factor = self.topicFocus ? self.topicTransformDist.zoom : 1;
+				force.nodes().forEach(function(d){
+					distances.push({
+						"id":d.id,
+						"distance":Math.sqrt((_x -d.x*factor)*(_x -d.x*factor) + (_y -d.y*factor)*(_y -d.y*factor))
+					});
+				});
+				return distances.sort(function(a,b){ return a.distance -b.distance;})[0];
+			}
+
+			//return closest node to x/y coords
+			function getClosestTheory(_x,_y,_topic){
+				var distances = [],
+					factor = self.topicFocus ? self.topicTransformDist.zoom : 1;
+				t_force.nodes().forEach(function(d){
+					d.distance = Math.sqrt((_x -d.x*factor)*(_x -d.x*factor) + (_y -d.y*factor)*(_y -d.y*factor));
+					if(!_topic || (_topic && d.topic === _topic)){
+						distances.push(d);
+					}
+				});
+				return distances.sort(function(a,b){ return a.distance -b.distance;})[0];
+			}
+
+			//for theories: curved links (http://bl.ocks.org/mbostock/1153292)
+			function linkArc(d) {
+				var src_x = d.source.x,
+					src_y = d.source.y,
+					tar_x = d.target.x,
+					tar_y = d.target.y,
+
+			  		dx = tar_x - src_x,
+			      	dy = tar_y - src_y,
+			      	dr = Math.sqrt(dx * dx + dy * dy);
+				return "M" + src_x + "," + src_y + "A" + dr + "," + dr + " 0 0,1 " + tar_x + "," + tar_y;
+			}
+
+            //prevent fisheye warping from mushing the visualization off-screen
+			function get_boundedPoint(_x,_y,_rad){
+				var obj = {},
+					ctr = {'x':self.w/2,'y':self.h/2},
+					rad = _rad || self.h*0.95/2,
+					hyp,
+					ang,
+
+					diff_x = _x -ctr.x,
+					diff_y = _y -ctr.y;
+				rad = rad -30; //this accounts for buffer radius
+				hyp = Math.sqrt((diff_x * diff_x) + (diff_y * diff_y));
+				ang = Math.atan2(diff_y,diff_x);
+
+				obj.x = hyp >=rad ? ctr.x +Math.cos(ang)*rad : _x;
+				obj.y = hyp >=rad ? ctr.y +Math.sin(ang)*rad : _y;
+				return obj;
+			}
+
+			function get_buffer(_arr,_rad,_x,_y){
+				var wedge = Math.PI/24;
+				for(var i=wedge; i<(Math.PI*2); i +=wedge){
+					_arr.push([(_x +Math.cos(i)*_rad),(_y +Math.sin(i)*_rad)]);
+				}
+				return _arr;
+			}
+
+			function update_link(){
+				console.log("In the update_link function.");
+				console.log(this);
+				this.attr('d',function(d){
+					var arr = [],
+						src = {},
+						tar = {};
+
+					console.log("do we make the fisheye?");
+					d.source.fisheye = fisheye(d.source);
+					d.target.fisheye = fisheye(d.target);
+
+					src = get_boundedPoint(d.source.fisheye.x,d.source.fisheye.y);
+					tar = get_boundedPoint(d.target.fisheye.x,d.target.fisheye.y);
+
+					arr.push({
+						'x':src.x,
+						'y':src.y
+					},{
+						'x':tar.x,
+						'y':tar.y
+					})
+					return line_linear(arr);
+				});
+			}
+
+			function update_hull(){
+
+				this.attr('d',function(d){
+
+					var pts = [],
+						pt0 = {},
+						pt1 = {},
+						ctr = {'x':self.w/2,'y':self.h/2};
+					var path;
+
+					//add to interpolate array: focus topic points
+					pts.push([d.x,d.y]);
+
+					//add to interpolate array: points for every incoming/outgoing link
+					links.each(function(_d){
+						if(_d.source === d || _d.target === d){
+							var src = d.id === _d.source.id,
+								dist = _d.value,
+								l = this.getTotalLength(),
+								p;
+								//p = src ? this.getPointAtLength(l/2 +dist +d.size_scaled) : this.getPointAtLength(l/2 -dist -d.size_scaled);
+
+							if(_d.source.id === 'quantGrav' && _d.target.id === 'hierProb'){
+								p = this.getPointAtLength(l/2);
+							} else if(_d.source.id === 'grandU' && _d.target.id === 'neutrinoMass'){
+								p = this.getPointAtLength(l/2);
+							} else if(_d.source.id === 'strongCP' && _d.target.id === 'matterAnti'){
+								p = src ? this.getPointAtLength(l/3) : this.getPointAtLength(l/2);
+							} else if(_d.source.id === 'hierProb' && _d.target.id === 'strongCP'){
+								p = src ? this.getPointAtLength(2*l/3) : this.getPointAtLength(5*l/6);
+							} else if(_d.source.id === 'cosConst' && _d.target.id === 'darkEnergy'){
+								p = this.getPointAtLength(l/3);
+							} else{
+								p = src ? this.getPointAtLength((d.size_scaled/30)*l +dist) : this.getPointAtLength(l -(d.size_scaled/30)*l -dist);
+							}
+
+							pts.push([p.x,p.y]);
+							get_buffer(pts,36,p.x,p.y);
+						}
+					});
+
+					var ang = Math.atan2( (d.y -ctr.y),(d.x -ctr.x) );
+					var rad = 36;
+
+					//create circular buffer
+					pts = get_buffer(pts,rad,d.x,d.y);
+
+					//calculate hulls from array of arrays
+					return "M" +d3.geom.hull(pts).join("L") +"Z";
+				});
+			}
+
+			function update_label(){
+				this
+					.attr('transform',function(d){
+						var pad = 0,
+							x = self.topics[d].fisheye.x <self.w/2 ? self.topics[d].fisheye.x -pad : self.topics[d].fisheye.x +pad,
+							y = self.topics[d].fisheye.y,
+							p = get_boundedPoint(x,y);
+						return 'translate(' +p.x +',' +p.y +')';
+					})
+					.style('text-anchor',function(d){
+						return self.topicFocus ? 'middle' : self.topics[d].x <self.w/2 ? 'end' : 'start';
+					});
+			}
+            //keep nodes inside their accordant hulls
+            // sosa note - it'd be fun to see what happens when we turn this off.
+			function gravity(alpha) {
+				return function(d){
+
+					var pad = 2,
+						ctr = {},
+
+						factor,
+
+						radius,
+						buffer,
+						dist_x,
+						dist_y,
+						dist_h;
+
+					ctr.x = d.focus.x || self.topics[d.topic].x;
+					ctr.y = d.focus.y || self.topics[d.topic].y;
+
+					if(!(self.topicFocus && d.topic === self.topicFocus)){
+						radius = t_rad;
+						buffer = 36 -12 -pad;//self.topicFocus && d.topic === self.topicFocus ? 36 : 36 -12 -pad;
+						factor = 1;
+
+						dist_x = Math.abs(ctr.x -d.x);
+						dist_y = Math.abs(ctr.y -d.y);
+						dist_h = Math.sqrt((dist_x*dist_x) +(dist_y*dist_y));
+
+						if(dist_h >=buffer){
+							d.x = d.x >ctr.x ? d.x -radius : d.x +radius;
+							d.y = d.y >ctr.y ? d.y -radius : d.y +radius;
+							d.speed = d.speed *-1;
+						}
+						d.x += (d.speed/factor) *alpha;
+						d.y += -(d.speed/factor) *alpha;
+					} else{
+						var goal = {},
+							hull = d3.select('.hull.' +d.topic).node().getBBox(),
+							idx = self.topics[self.topicFocus].theories.indexOf(d.id),
+							pad = 18;
+						goal.x = ctr.x -(hull.width/6);
+						goal.y = (ctr.y -(self.topics[self.topicFocus].theories.length *pad)/2) +pad*idx;
+
+						d.y += (goal.y - d.y) *alpha*0.1;
+						d.x += (goal.x - d.x) *alpha*0.1;
+					}
+				};
+			}
+
+			//resolve collisions (http://bl.ocks.org/mbostock/1804919)
+			function collide(alpha) {
+
+				var quadtree = d3.geom.quadtree(self.t_nodes);
+				return function(d){
+					if(!(self.topicFocus && d.topic === self.topicFocus)){
+						var //r = self.topicFocus ? d.topic === self.topicFocus ? /*c_rad +t_pad*/ 18 : t_rad : t_rad +t_pad,
+							r = t_rad +t_pad,
+							nx1 = d.x -r,
+							nx2 = d.x +r,
+							ny1 = d.y -r,
+							ny2 = d.y +r;
+						quadtree.visit(function(quad,x1,y1,x2,y2){
+							if(quad.point && (quad.point !==d)){
+								var x = d.x -quad.point.x,
+									y = d.y -quad.point.y,
+									l = Math.sqrt(x*x +y*y),
+									r = t_rad +t_pad;
+									//r = self.topicFocus ? d.topic === self.topicFocus ? c_rad +t_pad : t_rad : t_rad +t_pad;
+								if(l <r){
+									l = (l -r)/l*alpha;
+									d.x -= x *= l;
+									d.y -= y *= l;
+									quad.point.x += x;
+									quad.point.y += y;
+								}
+							}
+							return x1 >nx2 || x2 <nx1 || y1 >ny2 || y2 <ny1;
+						});
+					}
+				}
+			}
+
+			function tick(e){
+				links.call(update_link);
+				hulls.call(update_hull);
+				labelsG.call(update_label);
+			}
+
+			function t_tick(e){
+
+				//keep the theory simulation running
+				t_force.alpha(0.1);
+
+				//THEORIES LOGIC
+				t_nodes
+					.each(gravity(e.alpha))
+					.each(collide(0.5))
+					.attr('cx',function(d){
+						return d.x;
+					})
+					.attr('cy',function(d){
+						return d.y;
+					});
+
+				t_links
+					.attr('d',function(d){
+						return linkArc(d);
+					});
+
+				t_labelsG
+					.classed('visible',function(d){
+						return self.topicFocus && d.topic === self.topicFocus;
+					})
+					.attr('transform',function(d){
+						return 'translate(' +d.x +',' +d.y +')';
+					})
+					/*.style('text-anchor',function(d){
+						return d.x <(d.focus.x || self.topics[d.topic].x) ? 'end' : 'start';
+					})*/
+					;
+				/*t_labels
+					.attr('x',function(d){
+						return d.x <(d.focus.x || self.topics[d.topic].x) ? -9 : 9;
+					});*/
+			}
         },
+
         fullScreenMode:function(){
             var self = vis;
             //thanks, http://www.sitepoint.com/use-html5-full-screen-api/
@@ -875,4 +1835,26 @@ var init = function(){  //init will return a list of functions :)
  $(window).resize(function(){
 	vis.size();
 });
+
+$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function(){
+
+	var fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
+
+	//if exiting fullscreen
+	if (!fullscreenElement) {
+		vis.fsMode = false;
+		vis.fullScreen.classed('act',false);
+
+		vis.idxVisible = false;
+		vis.idxBox.classed('show',false);
+		vis.idx.classed('on',false);
+    }
+});
+
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
+
 console.log("Stand up Sosa. Did you forget what you came here to do?")
