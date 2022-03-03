@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "RD_Ecosystem",
+			"path": "."
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}

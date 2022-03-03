@@ -302,6 +302,7 @@ var init = function(){
 					self.data_raw[d] = data[d];
 					self.loadingManager(d,callback);
 				});
+				console.log(self.data_raw);
 			});
 			//get vote data
 
@@ -408,7 +409,7 @@ var init = function(){
 			}
 
 			//create dictionary for topics
-			console.log(self.data_raw);
+			console.log(self.data_raw.topics);
 			self.data_raw.topics.forEach(function(d){
 				d.size_scaled = scale_size(d.size);
 				self.topics[d.id] = d;
@@ -468,7 +469,7 @@ var init = function(){
 					}
 				}
 			});
-
+			// did not include in ACV version.
 			self.data_raw.theories_votes.forEach(function(d){
 				if(self.theories[d.title]){
 					self.theories[d.title].WP = d;
@@ -503,6 +504,8 @@ var init = function(){
 
 						self.t_nodes.push(t_node);
 					});
+
+					// did not include in ACV version.
 					d.theories.sort(function(a,b){
 						var _a = self.theories[a].WP ? parseInt(self.theories[a].WP.count) : 0,
 							_b = self.theories[b].WP ? parseInt(self.theories[b].WP.count) : 0;
