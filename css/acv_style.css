@@ -1,7 +1,7 @@
-@font-face {
+/* @font-face {
   font-family:'FuturaLT-Book';
   src: url('../fonts/FuturaLT-Book.ttf');
-}
+} */
 @font-face {
   font-family:'FuturaLT-Light';
   src: url('../fonts/FuturaLT-Light.ttf');
@@ -27,10 +27,22 @@ body {
 	background: #578bb7; /* Old browsers */
 	background: -moz-radial-gradient(center, circle cover, #578bb7 0%, #88282f 50%, #26232f 100%); /* FF3.6+ */
 	/*background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#578bb7), color-stop(50%,#88282f), color-stop(100%,#26232f)); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(bottom right, circle cover, #578bb7 0%,#88282f 50%,#26232f 100%); /* Chrome10+,Safari5.1+ */
+	background: -webkit-radial-gradient(bottom right,
+		circle cover, #2193b0 0%,
+		#6dd5ed 100%); /* Chrome10+,Safari5.1+ */
+	/* background: -webkit-radial-gradient(bottom right,
+	circle cover, #578bb7 0%,
+	#88282f 50%,#26232f 100%); Chrome10+,Safari5.1+ */
 	background: -o-radial-gradient(bottom right, circle cover, #578bb7 0%,#88282f 50%,#26232f 100%); /* Opera 12+ */
 	background: -ms-radial-gradient(bottom right, circle cover, #578bb7 0%,#88282f 50%,#26232f 100%); /* IE10+ */
-	background: radial-gradient(circle at bottom right, #578bb7 0%,#88282f 50%,#26232f 100%); /* W3C */
+	background: radial-gradient(circle at bottom right, #4568dc 0%,
+	#b06ab3 100%); /* W3C */
+	/* background: -o-radial-gradient(bottom right, circle cover, #578bb7 0%,#88282f 50%,#26232f 100%); /* Opera 12+ */
+	/* background: -ms-radial-gradient(bottom right, circle cover, #578bb7 0%,#88282f 50%,#26232f 100%); IE10+ */
+	/* background: radial-gradient(circle at bottom right, #578bb7 0%,#88282f 50%,#26232f 100%); W3C */
+
+	/* it'd be really cool to have a shifting gradient background.  */
+
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#578bb7', endColorstr='#26232f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	}
 

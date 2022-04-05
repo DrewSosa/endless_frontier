@@ -6,7 +6,7 @@ var init = function(){  //init will return a list of functions :)
         w:1436,
         h:782,
 
-        data_raw:{'name' : 'Sosa'},
+        data_raw:{},
         // object holders for  topics and theories
         topics:{},
         theories:{},
@@ -116,9 +116,9 @@ var init = function(){  //init will return a list of functions :)
 
             self.fullScreen
                 //.style('padding-left',fsL +'px')
-                .on('click',function(){
+                .on('click',function(event, d){
                     self.fullScreenMode();
-                    //d3.event.stopPropagation();
+                    event.stopPropagation();
                 });
             self.fullScreen.selectAll('.main')
                 .style('font-size',fsFont +'px')
@@ -243,10 +243,13 @@ var init = function(){  //init will return a list of functions :)
         generate:function(){
             var self = vis;
 
-            self.svg = d3.select('svg#map');
-            self.svgG = self.svg.append('g').classed('svgG',true);
-            self.titleCred = d3.select('#titleCred');
+            self.svg = d3.select('svg#map'); // grab the main SVG element.
+            // https://www.carlosrendon.me/unfinished_d3_book/d3_attr.html
+            self.svgG = self.svg.append('g').classed('svgG',true); //creates an group element.
+            // what is G? g is the SVG tag for the group element.
 
+            // selects HTML elements. 'g'
+            self.titleCred = d3.select('#titleCred');
             self.hBox = d3.select('#hBox');
             self.hBoxQ = d3.select('#hBox .descrip.q');
             self.hBoxBod = d3.select('#hBox .descrip.body');
@@ -300,7 +303,7 @@ var init = function(){  //init will return a list of functions :)
                 var str = '../data/policy/' + files[i] +'.json';
                 data = await d3.json(str);
                 self.data_raw[files[i]] = await data[files[i]];
-                console.log(Object.keys(self.data_raw));
+
            }
 
             self.processData();
@@ -351,7 +354,6 @@ var init = function(){  //init will return a list of functions :)
 		},
         processData: function(){
             console.log(`Processing data...`);
-            // console.log(Object.keys(self.data_raw));
             var self = vis;
             var scale_size = d3.scaleLinear()
                 .domain([1,15])
@@ -371,19 +373,19 @@ var init = function(){  //init will return a list of functions :)
                 // exists a better way to code this, but this suffices.
 
                 if (d.id === 'nih'){
-                    posX = 969;
+                    posX = 400;
                     posY = 592;
                 }
                 else if (d.id === 'arpa'){
-                    posX = 1070;
-                    posY = 409;
+                    posX = 400;
+                    posY = 500;
                 }
                 else if (d.id === 'procurement'){
                     posX = 481;
                     posY = 401;
                 }
                 else if (d.id === 'nationalLabs'){
-                    posX = 617;
+                    posX = 450;
                     posY = 398;
                 }
                 else{
@@ -413,6 +415,45 @@ var init = function(){  //init will return a list of functions :)
                     });
                 }
             });
+            //create dictionary for theories
+			self.data_raw.theories.forEach(function(d){
+				self.theories[d.id] = d;
+				self.theories[d.id].topic = [];
+				self.theories[d.id]['t_parents']  = [];
+				self.theories[d.id]['t_children'] = [];
+				self.theories[d.id]['t_siblings'] = [];
+
+				d.description_HTML = d.description;
+
+				//make links HTML-ready
+				if(d.links){
+					if(typeof(d.description) === 'object'){
+						d3.keys(d.description).forEach(function(_d){
+							var brax = d.description[_d].match(/\[(.+?)\]/g),
+								linx = [];
+							brax.forEach(function(__d,__i){
+								//remove square brackets
+								//concat accordant link
+								var str = __d.replace(/[\[\]']+/g,''),
+									lnk = d.links[_d][__i],
+									a 	= "<a target='_blank' href='" +lnk +"'>" +str +"</a>";
+								d.description_HTML[_d] = d.description_HTML[_d].replace(__d,a);
+							});
+						});
+					} else{
+						var brax = d.description.match(/\[(.+?)\]/g),
+							linx = [];
+						brax.forEach(function(_d,_i){
+							//remove square brackets
+							//concat accordant link
+							var str = _d.replace(/[\[\]']+/g,''),
+								a 	= "<a target='_blank' href='" +d.links[_i] +"'>" +str +"</a>";
+							d.description_HTML = d.description_HTML.replace(_d,a);
+						});
+					}
+				}
+			});
+            // 3/27 so this was not executing before, because my JSON fields were written incorrectly.
             //shifting the positions for each topic?
             self.data_raw.topics.forEach(function(d){
                 var arrpos = posXY(d); // returns the position of the topic, as defined above.
@@ -420,7 +461,6 @@ var init = function(){  //init will return a list of functions :)
                 d.x_orig = arrpos[0]; // log the original positions.
                 d.y_orig = arrpos[1];
                 self.nodes.push(d); // push updated topic into the nodes category, defined in line 16.
-
                 //push all theories into t_nodes array.
                 // account for topic, because some appear more than once.
                 if (d.theories){
@@ -430,8 +470,9 @@ var init = function(){  //init will return a list of functions :)
                         /* This returns theory at index _d if theory is in the t_nodes already, and extends the list if not?
                             confusing ass construction though.
                         */
+                        // e.g., _d == t_institutes
+                        //e.g. self.t_nodes[0] =   {id: 't_institutes', name: 'NIH Institutes', description: 'To improve th....
                         t_node = self.t_nodes.indexOf(self.theories[_d]) < 0 ? self.theories[_d] : $.extend(true, {}, self.theories[_d]);
-
                         t_node.topic = d.id;
 
                         t_node.x = d.x - Math.random();
@@ -445,6 +486,17 @@ var init = function(){  //init will return a list of functions :)
                         // push the node into our global array of nodes.
                         self.t_nodes.push(t_node);
                     });
+                    d.theories.sort(function(a,b){  // dont know if i need this.
+						var _a = self.theories[a].WP ? parseInt(self.theories[a].WP.count) : 0,
+							_b = self.theories[b].WP ? parseInt(self.theories[b].WP.count) : 0;
+						if (_a > _b) {
+							return -1;
+						}
+						if (_a < _b) {
+							return 1;
+						}
+						return 0;
+					});
                 }
             });
                     // for each topic, record links to their children.
@@ -460,6 +512,7 @@ var init = function(){  //init will return a list of functions :)
                 }
             });
 
+			//input theory data into t_links
             // figure this part out later. Doesn't get activated.
             self.data_raw.theories_links.forEach(function(d,i) {
                 //for each theory, sort out its corresponding links.
@@ -469,44 +522,44 @@ var init = function(){  //init will return a list of functions :)
                 e1 = null,
                 e2 = null;
 
-                //if length is >1, could either be because of quals or because a theory
-				//appears twice and its relationships don't change -- so account for both nodes
-                // if(n1.length >1 && n2.length >1){ //if it is both a target and a source in multiple places.
-                //     //
-				// 	e1 = d.source_qual ? n1.filter(function(n){ return n.topic === d.source_qual; })[0] : null;
-				// 	e2 = d.target_qual ? n2.filter(function(n){ return n.topic === d.target_qual; })[0] : null;
-				// 	e1 && e2 ? pairs.push([e1,e2])
-				// 	: e1 && !e2 ? pairs.push([e1,n2[0]],[e1,n2[1]])
-				// 	: !e1 && e2 ? pairs.push([n1[0],e2],[n1[1],e2])
-				// 	: pairs.push([n1[0],n2[0]],[n1[0],n2[1]],[n1[1],n2[0]],[n1[1],n2[1]]);
-				// } else if(n1.length >1 && n2.length <=1){
-				// 	e1 = d.source_qual ? n1.filter(function(n){ return n.topic === d.source_qual; })[0] : null;
-				// 	e2 = n2[0];
-				// 	e1 ? pairs.push([e1,e2]) : pairs.push([n1[0],e2],[n1[1],e2]);
-				// } else if(n1.length <=1 && n2.length >1){
-				// 	e1 = n1[0];
-				// 	e2 = d.target_qual ? n2.filter(function(n){ return n.topic === d.target_qual; })[0] : null;
-				// 	e2 ? pairs.push([e1,e2]) : pairs.push([e1,n2[0]],[e1,n2[1]]);
-				// } else{
-				// 	e1 = n1[0];
-				// 	e2 = n2[0];
-				// 	pairs.push([e1,e2]);
-				// }
-				// pairs.forEach(function(p){
-				// 	self.t_links.push({
-				// 		'source':p[0],
-				// 		'target':p[1],
-				// 		'type':d.type
-				// 	});
-				// 	if(d.type === 'parent'){
-				// 		p[0].t_parents.push(p[1]);
-				// 		p[1].t_children.push(p[0]);
-				// 	} else if(d.type === 'sibling'){
-				// 		console.log(d); // d -- theory link :)
-				// 		p[0].t_siblings.push(p[1]);
-				// 		p[1].t_siblings.push(p[0]);
-				// 	}
-				// });
+                // if length is >1, could either be because of quals or because a theory
+				// appears twice and its relationships don't change -- so account for both nodes
+                if(n1.length >1 && n2.length >1){ //if it is both a target and a source in multiple places.
+                    //
+					e1 = d.source_qual ? n1.filter(function(n){ return n.topic === d.source_qual; })[0] : null;
+					e2 = d.target_qual ? n2.filter(function(n){ return n.topic === d.target_qual; })[0] : null;
+					e1 && e2 ? pairs.push([e1,e2])
+					: e1 && !e2 ? pairs.push([e1,n2[0]],[e1,n2[1]])
+					: !e1 && e2 ? pairs.push([n1[0],e2],[n1[1],e2])
+					: pairs.push([n1[0],n2[0]],[n1[0],n2[1]],[n1[1],n2[0]],[n1[1],n2[1]]);
+				} else if(n1.length >1 && n2.length <=1){
+					e1 = d.source_qual ? n1.filter(function(n){ return n.topic === d.source_qual; })[0] : null;
+					e2 = n2[0];
+					e1 ? pairs.push([e1,e2]) : pairs.push([n1[0],e2],[n1[1],e2]);
+				} else if(n1.length <=1 && n2.length >1){
+					e1 = n1[0];
+					e2 = d.target_qual ? n2.filter(function(n){ return n.topic === d.target_qual; })[0] : null;
+					e2 ? pairs.push([e1,e2]) : pairs.push([e1,n2[0]],[e1,n2[1]]);
+				} else{
+					e1 = n1[0];
+					e2 = n2[0];
+					pairs.push([e1,e2]);
+				}
+				pairs.forEach(function(p){
+					self.t_links.push({
+						'source':p[0],
+						'target':p[1],
+						'type':d.type
+					});
+					if(d.type === 'parent'){
+						p[0].t_parents.push(p[1]);
+						p[1].t_children.push(p[0]);
+					} else if(d.type === 'sibling'){
+						// d -- theory link :)
+						p[0].t_siblings.push(p[1]);
+						p[1].t_siblings.push(p[0]);
+					}
+				});
 			});
             self.draw();
         },
@@ -521,7 +574,6 @@ var init = function(){  //init will return a list of functions :)
 
         fadeIn:function(){
             var self = vis;
-
             self.svgG
                 .style('visibility','visible')
                 .style('opacity',1)
@@ -546,25 +598,28 @@ var init = function(){  //init will return a list of functions :)
 
             self.w = 1436;
             self.h = 782;
-
+            // this function is performing a transform on svg group that offsets x and y by a certain
+            // scaling factor.
+            // within the svgG group by a serva
             self.svgG
                 .attr('transform', function(){
                     var x = (self.w - self.w*self.scaleFactor) /2.5 ,
-                        y = (self.y - self.h*self.scaleFactor) / 2;
+                        y = (self.h - self.h*self.scaleFactor) / 2;
                         return 'translate(' + x + ',' + y + ')scale(' + self.scaleFactor + ')';
                 });
             // series of clickhandlers.
             self.titleCred.classed('show', true);
             self.titleCred.selectAll('.return')
-                .on('click', function(){
+                .on('click', function(event, d){
                     if (window.self !== window.top && self.fsMode ) {
                         self.fullScreenMode();
-                        d3.event.stopPropogation();
+                        // d3.event.stopPropogation();
+                        event.stopPropagation();
                     }
                     else{
                         if (self.fsMode){
                             self.fullScreenMode();
-                            d3.event.stopPropogation();
+                            event.stopPropogation();
                         }
                         // what does this do? maybe it refreshes the page?
                         window.location.replace("https://www.quantamagazine.org/20150803-physics-theories-map/")
@@ -588,16 +643,24 @@ var init = function(){  //init will return a list of functions :)
                     topicUnview(true);
                 });
             self.fullScreen.selectAll('.main') // not sure what this does.
-                .on('click', function(){
+                .on('click', function(event, d){
                     self.fullScreenMode();
-                    d3.event.stopPropogation();
+                    event.stopPropagation();
                 });
+            self.t_hBoxVote //might not need these
+				.on('click',function(){
+					theoryVote(self.theories[self.theoryFocus],this);
+				});
+			self.t_hBoxTweet
+				.on('click',function(){
+					theoryTweet(self.theories[self.theoryFocus]);
+				});
 
             // For each topic, collect its corresponding theories in alphabetical order.
             var alpha = [],
                 top_arr = Object.keys(self.topics).sort(); // get a list of all topics sorted.
 
-                top_arr.forEach(function(d){
+            top_arr.forEach(function(d){
                 //create a topic object.
                 var obj = {
                     'id': d,
@@ -627,6 +690,7 @@ var init = function(){  //init will return a list of functions :)
                             'topic': false
                         }
                         alpha.push(t_obj);
+
                     });
                 }
         });
@@ -657,7 +721,6 @@ var init = function(){  //init will return a list of functions :)
                     return _d.topic === d.parent && _d.id === d.id;
                 })[0];
 
-
                 self.topicFocus = d.parent;
                 topicFocus(d.parent);
                 topicView(d.parent);
@@ -685,7 +748,8 @@ var init = function(){  //init will return a list of functions :)
         col_01 = d3.select('#idxBox #list .col_01')
             .selectAll('div.theoryLink')
             .data(alpha.slice(0, split_01))
-        col_01.enter().append('div')
+            .enter()
+            .append('div')
             .classed('theoryLink', true);
         col_01
             .classed('topic', function(d) {
@@ -704,13 +768,18 @@ var init = function(){  //init will return a list of functions :)
                 return d.first ? '0px' : d.topic ? topicPad +'px' : theoryPad +'px';
             })
             .html(function(d){ return d.name; });
+            col_01
+				.on('click',function(event, d){
+					colClick(d);
+				});
             col_01.exit().remove();
-
-			col_02 = d3.select('#idxBox #list .col_02')
+            // do the same for col 2 & 3.
+            col_02 = d3.select('#idxBox #list .col_02')
 				.selectAll('div.theoryLink')
-				.data(alpha.slice(split_01,split_02));
-			col_02.enter().append('div')
-				.classed('theoryLink',true);
+				.data(alpha.slice(split_01,split_02))
+                .enter()
+                .append('div')
+                .classed('theoryLink', true);
 			col_02
 				.classed('topic',function(d){
 					return d.topic;
@@ -728,7 +797,6 @@ var init = function(){  //init will return a list of functions :)
 					return d.first ? '0px' : d.topic ? topicPad +'px' : theoryPad +'px';
 				})
 				.html(function(d){ return d.name; });
-            // do the same for col 2 & 3.
             col_02
 				.on('click',function(d){
 					colClick(d);
@@ -736,11 +804,14 @@ var init = function(){  //init will return a list of functions :)
 			col_02.exit().remove();
 			col_03 = d3.select('#idxBox #list .col_03')
 				.selectAll('div.theoryLink')
-				.data(alpha.slice(split_02,alpha.length));
-			col_03.enter().append('div')
-				.classed('theoryLink',true);
+				.data(alpha.slice(split_02,alpha.length))
+                .enter()
+                .append('div')
+                .classed('theoryLink', true);
+
 			col_03
 				.classed('topic',function(d){
+                    print(d.topic);
 					return d.topic;
 				})
 				.each(function(d,i){
@@ -772,11 +843,11 @@ var init = function(){  //init will return a list of functions :)
             var line_linear = d3.line()
                 .x(function(d) { return d.x; })
                 .y(function(d) { return d.y; })
-                .curve(d3.curveBasis);
+                .curve(d3.curveLinear);
             var line_hull = d3.line()
                 .x(function(d) { return d.x; })
                 .y(function(d) { return d.y; })
-                .curve(d3.curveBasis);
+                .curve(d3.curveLinearClosed);
 
 
             /* Fish Eye - https://bost.ocks.org/mike/fisheye/
@@ -788,32 +859,64 @@ var init = function(){  //init will return a list of functions :)
             var fisheye = d3.fisheye.circular()
                 .radius(self.h/2) // set radius to half
                 .distortion(1); // go back and look at what this does later.
-
             // var zoom = d3.behaviour.zoom();
 
-            //initialize the force graph.
-            var force = d3.layout.force()
-                .nodes(self.nodes)
-                .links(self.links)
-                .size([self.w, self.h])
-                .charge(-1500)
-                .linkStrength(function(d){
-                    return 0;
+
+            //v5 version.
+
+            var force = d3.forceSimulation(self.nodes)
+                .force('link', d3.forceLink(self.links)
+                    .strength(function(d){
+                        return 0;
+                    }))
+                .force("center", d3.forceCenter(self.w /2, self.h / 2))
+                // .alphaDecay(0.01)
+                .force('charge',d3.forceManyBody().strength(-1500))
+                // .force('charge', -1500)
+                .on('tick', () => {
+                    links.call(update_link);
+                    hulls.call(update_hull);
+                    labelsG.call(update_label);
                 })
-                .on('tick', tick)
-                .start()
                 ;
-            // create a topic force graph?
-            var t_force = d3.layout.force()
-				.nodes(self.t_nodes)
-				.links(self.t_links)
-				.size([self.w,self.h])
-				.gravity(0)
-				.charge(0)
-				.linkStrength(0)
-			    .on('tick',t_tick)
-				.start()
-				;
+
+            var t_force = d3.forceSimulation(self.t_nodes)
+                .force('link', d3.forceLink()
+                        .links(self.t_links)
+                        .strength(0)
+                        )
+
+                .force("center", d3.forceCenter(self.w /2, self.h / 2))
+                .force("x", d3.forceX([self.w/2]).strength(0)) //simulating gravity.
+                .force("y", d3.forceY([self.h/2]).strength(0)) //simulating gravity.
+                .force('charge',d3.forceManyBody().strength(0))
+                .on('tick', () => {
+                    // keep the theory simulation running
+                    t_force.alpha(0.1);
+                    // // //THEORIES LOGIC
+                    t_nodes
+                    .each( gravity(t_force.alpha()) )
+                    .each(collide(0.5))
+                    .attr('cx',function(d){
+                        // console.log(d.x);
+                        return d.x;
+                    })
+                    .attr('cy',function(d){
+                        return d.y;
+                    });
+                    t_links
+                    .attr('d',function(d){
+                        return linkArc(d);
+                    });
+                    t_labelsG
+                    .classed('visible',function(d){
+                        return self.topicFocus && d.topic === self.topicFocus;
+                    })
+                    .attr('transform',function(d){
+                        return 'translate(' +d.x +',' +d.y +')';
+                    });
+                })
+                ;
 
             var topics,
 				links,
@@ -839,20 +942,21 @@ var init = function(){  //init will return a list of functions :)
 
             // not sure what the on event does.
             self.svg
-                .on('click', function(){
+                .on('click', function(event, d){
                     // initialize the mouse object and grab its location.
-                    var mouse = d3.mouse(this),
+                    // var mouse = d3.pointer(this),
+                    var mouse = d3.pointer(event),
                         mX = mouse[0] - self.topicTransformDist.x,
                         mY = mouse[1] - self.topicTransformDist.y;
-                        pX = d3.event.pageX - self.topicTransformDist.x,
-                        pY = d3.event.pageY - self.topicTransformDist.y;
+                        // pX = d3.event.pageX - self.topicTransformDist.x,
+                        // pY = d3.event.pageY - self.topicTransformDist.y;
                     //initialize focus object, which holds the topic closest to the mouse.
                     var focus = getClosest(mX, mY), // getclosest returns a topic object.
                         t_focus = self.topicFocus ?  //set the topic to focus on.
                             getClosestTheory(mX, mY, self.topicFocus): getClosestTheory(mY, mY),
                         t_focusDistance = self.topicFocus ? self.focusDistance/1.5 : self.focusDistance/3;
 
-                        // if the idx button is visible, hide it.
+                    // if the idx button is visible, hide it.
                     if (self.idxVisible){
                         hideIdxBox();
                     }
@@ -886,6 +990,7 @@ var init = function(){  //init will return a list of functions :)
 
 							//if clicking on a theory when no theory is selected
 							if(!self.theoryFocus && t_focus.distance <t_focusDistance){
+                                console.log("theory clicked");
 								self.theoryFocus = t_focus.id;
 								theoryLock(t_focus,true);
 
@@ -920,23 +1025,22 @@ var init = function(){  //init will return a list of functions :)
 							});
 					}
 				}) //when the mouse moves, update the mouse position and the focus.
-				.on('mousemove',function(){
+				.on('mousemove',function(event, d){
 
 					if(!self.theoryFocus){
-
-						var mouse = d3.mouse(this),
+						// var mouse = d3.pointer(this),
+                        var mouse = d3.pointer(event),
 							mX = mouse[0] -self.topicTransformDist.x,
-							mY = mouse[1] -self.topicTransformDist.y,
-							pX = d3.event.pageX -self.topicTransformDist.x,
-							pY = d3.event.pageY -self.topicTransformDist.y;
+							mY = mouse[1] -self.topicTransformDist.y;
+							// pX = d3.event.pageX -self.topicTransformDist.x,
+							// pY = d3.event.pageY -self.topicTransformDist.y;
 						var focus = getClosest(mX,mY),
 							t_focus = self.topicFocus ? getClosestTheory(mX,mY,self.topicFocus) : getClosestTheory(mX,mY),
 							t_focusDistance = self.topicFocus ? self.focusDistance/1.5 : self.focusDistance/3;
 
-						fisheye.focus(mouse);
-
+                        fisheye.focus(mouse);
 						//highlight closest topic
-						if(focus.distance <self.focusDistance){
+						if(focus.distance < self.focusDistance){
 							self.topicHighlight = focus.id;
 							topicFocus(focus.id);
 						} else if(!self.topicFocus){
@@ -959,7 +1063,6 @@ var init = function(){  //init will return a list of functions :)
 						} else{
 							theoryUnfocus();
 						}
-
 						links.call(update_link);
 						hulls.call(update_hull);
 						labelsG.call(update_label);
@@ -988,15 +1091,14 @@ var init = function(){  //init will return a list of functions :)
 					//still carry out theory sub-highlighting within selected topic
 					} else if(self.topicFocus && self.theoryFocus){
 
-						var mouse = d3.mouse(this),
+                        var mouse = d3.pointer(event),
 							mX = mouse[0] -self.topicTransformDist.x,
-							mY = mouse[1] -self.topicTransformDist.y,
-							pX = d3.event.pageX -self.topicTransformDist.x,
-							pY = d3.event.pageY -self.topicTransformDist.y;
+							mY = mouse[1] -self.topicTransformDist.y;
+							// pX = d3.event.pageX -self.topicTransformDist.x,
+							// pY = d3.event.pageY -self.topicTransformDist.y;
 						var focus = getClosest(mX,mY),
 							t_focus = getClosestTheory(mX,mY),
 							t_focusDistance = self.topicFocus ? self.focusDistance/1.5 : self.focusDistance/3;
-
 						fisheye.focus(mouse);
 
 						//highlight closest topic
@@ -1029,28 +1131,36 @@ var init = function(){  //init will return a list of functions :)
 						}
 					}
 				});
-
         //TOPICS
-        topics = self.svgG.selectAll('g.topics')
-            .data([force]);
-        topics.enter().append('g')
+        //https://stackoverflow.com/questions/33400361/basic-d3-why-can-you-select-things-that-dont-exist-yet
+        //https://bost.ocks.org/mike/join/ <--- good article on why this is.
+        topics = self.svgG.selectAll('g.topics') // my guess is this is initially empty.
+            .data([force])
+            .enter() //bind force data to 'g.topics'.
+            .append('g')
             .classed('topics',true);
         topics.exit().remove();
+
         links = topics.selectAll('path.link')
-            .data(function(d){ return d.links(); })
-        links.enter().append('path')
+            .data(function(d){
+                return d.force('link').links();
+                })
+            .enter()
+            .append('path')
             .classed('link',true);
-        links
+        links  // i think this works.
             .attr('class',function(d){
                 return 'link ' +d.source.id +' ' +d.target.id;
             });
         links.exit().remove();
+
         hulls = topics.selectAll('path.hull')
-            .data(function(d){ return d.nodes(); })
-            ;
-        hulls.enter().append('path')
+            .data(function(d){
+                return d.nodes(); })
+            .enter()
+            .append('path')
             .classed('hull',true);
-        hulls
+        hulls // have no idea why this worked tbh..
             .attr('class',function(d){
                 return 'hull ' +d.id;
             })
@@ -1060,19 +1170,23 @@ var init = function(){  //init will return a list of functions :)
 
         //THEORIES -- what does this do?
         theories = self.svgG.selectAll('g.theories')
-            .data([t_force]);
-        theories.enter().append('g')
+            .data([t_force])
+            .enter()
+            .append('g')
             .classed('theories',true);
         theories.exit().remove();
+
         t_links = theories.selectAll('path.t_link')
-            .data(function(d){ return d.links(); });
-        t_links.enter().append('path')
+            .data(function(d){
+                return d.force('link').links(); })
+            .enter()
+            .append('path')
             .classed('t_link',true);
         t_links.exit().remove();
         t_nodes = theories.selectAll('circle.t_node')
             .data(function(d){ return d.nodes(); })
-            ;
-        t_nodes.enter().append('circle')
+            .enter()
+            .append('circle')
             .classed('t_node',true);
         t_nodes
             .attr('class',function(d){
@@ -1085,13 +1199,15 @@ var init = function(){  //init will return a list of functions :)
         t_nodes.exit().remove();
         t_labelsG = theories.selectAll('g.t_labelsG')
             .data(function(d){ return d.nodes(); })
-            ;
-        t_labelsG.enter().append('g')
+            .enter()
+            .append('g')
             .classed('t_labelsG',true);
         t_labelsG.exit().remove();
+
         t_labels = t_labelsG.selectAll('text.t_label')
-            .data(function(d,i){ return [d]; });
-        t_labels.enter().append('text')
+            .data(function(d,i){ return [d]; })
+            .enter()
+            .append('text')
             .classed('t_label',true);
         t_labels
             .attr('x',9)
@@ -1101,8 +1217,9 @@ var init = function(){  //init will return a list of functions :)
             });
         t_labels.exit().remove();
         t_counts = t_labels.selectAll('tspan.t_count')
-            .data(function(d,i){ return [d]; });
-        t_counts.enter().append('tspan')
+            .data(function(d,i){ return [d]; })
+            .enter()
+            .append('tspan')
             .classed('t_count',true);
         t_counts
             .classed('hide',true)
@@ -1120,22 +1237,24 @@ var init = function(){  //init will return a list of functions :)
 
         //LABELS
         labelContainer = self.svgG.selectAll('g.labelContainer')
-            .data([Object.keys(self.topics)]);
-        labelContainer.enter().append('g')
+            .data([Object.keys(self.topics)])
+            .enter().append('g')
             .classed('labelContainer',true);
         labelContainer.exit().remove();
         labelsG = labelContainer.selectAll('g.labelsG')
-            .data(function(d){ return d; });
-        labelsG.enter().append('g')
+            .data(function(d){ return d; })
+            .enter().append('g')
             .classed('labelsG',true);
         labelsG
             .style('text-anchor',function(d){
                 return self.topics[d].x <self.w/2 ? 'end' : 'start';
             });
         labelsG.exit().remove();
+
         labels = labelsG.selectAll('text.label')
-            .data(function(d){ return [d]; });
-        labels.enter().append('text')
+            .data(function(d){ return [d]; })
+            .enter()
+            .append('text')
             .classed('label',true);
         labels
             .text(function(d){
@@ -1147,6 +1266,7 @@ var init = function(){  //init will return a list of functions :)
         which means you can invoke (call) a function before or after it has been defined.
         This doesn't not work for function expressions, aka anonymous functions.
         */
+
         function topicFocus(_id){
             //only highlight if closest to mouse
             hulls
@@ -1215,7 +1335,6 @@ var init = function(){  //init will return a list of functions :)
                     return self.topics[_id].description_HTML;
                 });
             self.titleCred.classed('show',false);
-
             self.svgG
                 .transition()
                 .duration(self.animTime)
@@ -1396,7 +1515,6 @@ var init = function(){  //init will return a list of functions :)
                         return descrip;
                     });
             }
-
             t_nodes
                 /*.each(function(d){
                     d.fixed = d.id === theory.id && self.topicFocus && d.topic === self.topicFocus;
@@ -1552,21 +1670,18 @@ var init = function(){  //init will return a list of functions :)
 				return _arr;
 			}
 
-			function update_link(){
-				console.log("In the update_link function.");
-				console.log(this);
-				this.attr('d',function(d){
+			function update_link(selection){
+                //supposed to be the list of node objects. in the form of src, target, value.
+				selection.attr('d',function(d){
 					var arr = [],
 						src = {},
 						tar = {};
 
-					console.log("do we make the fisheye?");
 					d.source.fisheye = fisheye(d.source);
 					d.target.fisheye = fisheye(d.target);
-
+                    // console.log(d.source.fisheye.x,d.source.fisheye.y);
 					src = get_boundedPoint(d.source.fisheye.x,d.source.fisheye.y);
 					tar = get_boundedPoint(d.target.fisheye.x,d.target.fisheye.y);
-
 					arr.push({
 						'x':src.x,
 						'y':src.y
@@ -1578,9 +1693,8 @@ var init = function(){  //init will return a list of functions :)
 				});
 			}
 
-			function update_hull(){
-
-				this.attr('d',function(d){
+			function update_hull(selection){
+				selection.attr('d', function(d){
 
 					var pts = [],
 						pt0 = {},
@@ -1600,17 +1714,19 @@ var init = function(){  //init will return a list of functions :)
 								p;
 								//p = src ? this.getPointAtLength(l/2 +dist +d.size_scaled) : this.getPointAtLength(l/2 -dist -d.size_scaled);
 
-							if(_d.source.id === 'quantGrav' && _d.target.id === 'hierProb'){
+							if(_d.source.id === 'nih' && _d.target.id === 'arpa'){
 								p = this.getPointAtLength(l/2);
-							} else if(_d.source.id === 'grandU' && _d.target.id === 'neutrinoMass'){
+							} else if(_d.source.id === 'arpa' && _d.target.id === 'nationalLabs'){
 								p = this.getPointAtLength(l/2);
-							} else if(_d.source.id === 'strongCP' && _d.target.id === 'matterAnti'){
+							} else if(_d.source.id === 'nationalLabs' && _d.target.id === 'procurement'){
 								p = src ? this.getPointAtLength(l/3) : this.getPointAtLength(l/2);
 							} else if(_d.source.id === 'hierProb' && _d.target.id === 'strongCP'){
 								p = src ? this.getPointAtLength(2*l/3) : this.getPointAtLength(5*l/6);
-							} else if(_d.source.id === 'cosConst' && _d.target.id === 'darkEnergy'){
+							}
+                            else if(_d.source.id === 'cosConst' && _d.target.id === 'darkEnergy'){
 								p = this.getPointAtLength(l/3);
-							} else{
+							}
+                            else{
 								p = src ? this.getPointAtLength((d.size_scaled/30)*l +dist) : this.getPointAtLength(l -(d.size_scaled/30)*l -dist);
 							}
 
@@ -1621,17 +1737,16 @@ var init = function(){  //init will return a list of functions :)
 
 					var ang = Math.atan2( (d.y -ctr.y),(d.x -ctr.x) );
 					var rad = 36;
-
+                    // console.log(pts);
 					//create circular buffer
 					pts = get_buffer(pts,rad,d.x,d.y);
-
 					//calculate hulls from array of arrays
-					return "M" +d3.geom.hull(pts).join("L") +"Z";
+                    return "M" +d3.polygonHull(pts).join("L") +"Z";
 				});
 			}
 
-			function update_label(){
-				this
+			function update_label(selection){
+				selection
 					.attr('transform',function(d){
 						var pad = 0,
 							x = self.topics[d].fisheye.x <self.w/2 ? self.topics[d].fisheye.x -pad : self.topics[d].fisheye.x +pad,
@@ -1643,11 +1758,13 @@ var init = function(){  //init will return a list of functions :)
 						return self.topicFocus ? 'middle' : self.topics[d].x <self.w/2 ? 'end' : 'start';
 					});
 			}
+
             //keep nodes inside their accordant hulls
             // sosa note - it'd be fun to see what happens when we turn this off.
 			function gravity(alpha) {
 				return function(d){
-
+                    //d is theories...
+                    //{id: 't_commonFund', name: 'Common Fund', description: 'The [NIH Common Fund] is a component of the NIH bu… across multiple biomedical research disciplines.', links: Array(1), topic: 'nih', …}
 					var pad = 2,
 						ctr = {},
 
@@ -1659,10 +1776,11 @@ var init = function(){  //init will return a list of functions :)
 						dist_y,
 						dist_h;
 
+                    // return
 					ctr.x = d.focus.x || self.topics[d.topic].x;
 					ctr.y = d.focus.y || self.topics[d.topic].y;
 
-					if(!(self.topicFocus && d.topic === self.topicFocus)){
+                    if(!(self.topicFocus && d.topic === self.topicFocus)){
 						radius = t_rad;
 						buffer = 36 -12 -pad;//self.topicFocus && d.topic === self.topicFocus ? 36 : 36 -12 -pad;
 						factor = 1;
@@ -1695,7 +1813,7 @@ var init = function(){  //init will return a list of functions :)
 			//resolve collisions (http://bl.ocks.org/mbostock/1804919)
 			function collide(alpha) {
 
-				var quadtree = d3.geom.quadtree(self.t_nodes);
+				var quadtree = d3.quadtree(self.t_nodes);
 				return function(d){
 					if(!(self.topicFocus && d.topic === self.topicFocus)){
 						var //r = self.topicFocus ? d.topic === self.topicFocus ? /*c_rad +t_pad*/ 18 : t_rad : t_rad +t_pad,
@@ -1723,50 +1841,6 @@ var init = function(){  //init will return a list of functions :)
 						});
 					}
 				}
-			}
-
-			function tick(e){
-				links.call(update_link);
-				hulls.call(update_hull);
-				labelsG.call(update_label);
-			}
-
-			function t_tick(e){
-
-				//keep the theory simulation running
-				t_force.alpha(0.1);
-
-				//THEORIES LOGIC
-				t_nodes
-					.each(gravity(e.alpha))
-					.each(collide(0.5))
-					.attr('cx',function(d){
-						return d.x;
-					})
-					.attr('cy',function(d){
-						return d.y;
-					});
-
-				t_links
-					.attr('d',function(d){
-						return linkArc(d);
-					});
-
-				t_labelsG
-					.classed('visible',function(d){
-						return self.topicFocus && d.topic === self.topicFocus;
-					})
-					.attr('transform',function(d){
-						return 'translate(' +d.x +',' +d.y +')';
-					})
-					/*.style('text-anchor',function(d){
-						return d.x <(d.focus.x || self.topics[d.topic].x) ? 'end' : 'start';
-					})*/
-					;
-				/*t_labels
-					.attr('x',function(d){
-						return d.x <(d.focus.x || self.topics[d.topic].x) ? -9 : 9;
-					});*/
 			}
         },
 
@@ -1858,3 +1932,4 @@ d3.selection.prototype.moveToFront = function() {
 };
 
 console.log("Stand up Sosa. Did you forget what you came here to do?")
+setTimeout(function() { debugger; }, 50000);

@@ -6,12 +6,16 @@
 			"date":"",
 			"question":"Why is the NIH the public steward of biomedical science and public health research?",
 			"description":"The National Institutes of Health (NIH /ɛn.aɪ.ˈeɪtʃ/) is the primary agency of the United States government responsible for biomedical and public health research. It was founded in the late 1880s and is now part of the United States Department of Health and Human Services. The majority of NIH facilities are located in Bethesda, Maryland and other nearby suburbs of the Washington metropolitan area, with other primary facilities in the Research Triangle Park in North Carolina and smaller satellite facilities located around the United States. The NIH conducts its own scientific research through its Intramural Research Program (IRP) and provides major biomedical research funding to non-NIH research facilities through its Extramural Research Program.",
-			"policy_theories":[
+			"theories":[
 				"t_institutes",
 				"t_commonFund",
 				"t_arpaH"
 			],
 			"children":[
+				{
+					"id": "arpa",
+					"overlap": 2
+				}
 			]
 		},
 		{
@@ -21,7 +25,7 @@
 			"date":"",
 			"question": "What are Advanced Research Projects Agencies?",
 			"description":"ARPAs create radically better approaches to hard problems by conducting solutions-oriented R&D. The Department of Defense (DOD)’s Defense Advanced Research Projects Agency (DARPA), now in its seventh decade, conducted the pivotal R&D for new military capabilities such as stealth and precision strike and, more broadly, for new information technologies ranging from the internet to artificial intelligence. DARPA’s track record inspired the establishment of the Department of Energy’s ARPA-E and the Office of the Director of National Intelligence’s IARPA. Both of these new ARPAs are well underway, with robust portfolios of R&D programs and encouraging results. They show that it is possible to adapt DARPA’s model for different public purposes.",
-			"policy_theories":[
+			"theories":[
 				"t_arpaE",
 				"t_darpa",
 				"t_arpaH",
@@ -29,6 +33,10 @@
 				"t_iarpa"
 			],
 			"children":[
+				{
+					"id": "nationalLabs",
+					"overlap": 2
+				}
 			]
 		},
 		{
@@ -41,7 +49,7 @@
 			"links":[
 				"https://www.dayoneproject.org/post/procurement-primer"
 			],
-			"policy_theories":[
+			"theories":[
 				"t_milestonePayments",
 				"t_prizesChallenges",
 				"t_amc",
@@ -58,12 +66,17 @@
 			"date":"",
 			"question":"What are National Labs?",
 			"description":"DOE National Labs are world-class at building large-scale user facilities and at maintaining highsecurity technical infrastructure.",
-			"policy_theories":[
+			"theories":[
 				"t_LANL",
 				"t_ANL",
 				"t_ORNL"
 			],
 			"children":[
+
+				{
+					"id": "procurement",
+					"overlap": 2
+				}
 
 			]
 		}

@@ -1,13 +1,12 @@
-
 var init = function(){
 
 	return {
-		// set the width and the height.
+
 		w:1436,
 		h:782,
 
 		data_raw:{},
-		// object holders for  topics and theories
+
 		topics:{},
 		theories:{},
 
@@ -21,10 +20,10 @@ var init = function(){
 
 		scaleFactor:1,
 
-		focusDistance:180, // dunno what this is.
-		topicFocus:null, //dunno what this is either.
+		focusDistance:180,
+		topicFocus:null,
 		topicHighlight:null,
-		topicTransformDist:{  // dunno what this does.
+		topicTransformDist:{
 			'x':0,
 			'y':0,
 			'zoom':1
@@ -287,22 +286,13 @@ var init = function(){
 
 			//get all JSON files
 			sets.forEach(function(d,i){
-				// i think this is where the data is accessed.
-				var str = '../data/' + d +'.json';
-
-				// editing this part. v4 version.
-				// d3.json(str).then(function(data){
-				// 	console.log("trying to print data")
-				// 	console.log(data)
-				// 	self.data_raw[d] = data[d];
-				// 	self.loadingManager(d,callback);
-				// });
-
+				var str = 'data/' +d +'.json';
 				d3.json(str,function(data){
 					self.data_raw[d] = data[d];
 					self.loadingManager(d,callback);
 				});
 			});
+
 			//get vote data
 
 			//Get our voting options via AJAX.
@@ -344,16 +334,10 @@ var init = function(){
 			});
 		},
 		processData:function(){
-			// console.log(d)
 			var self = vis;
-			// #v3 version
 			var scale_size = d3.scale.linear()
 				.domain([1,15])
 				.range([5,25]);
-				// v4 version.
-			// // var scale_size = d3.scaleLinear()
-			// 	.domain([1,15])
-			// 	.range([5,25]);
 
 			//positioning functions
 			function posXY(d){
@@ -408,7 +392,6 @@ var init = function(){
 			}
 
 			//create dictionary for topics
-
 			self.data_raw.topics.forEach(function(d){
 				d.size_scaled = scale_size(d.size);
 				self.topics[d.id] = d;
@@ -466,7 +449,6 @@ var init = function(){
 					}
 				}
 			});
-
 			self.data_raw.theories_votes.forEach(function(d){
 				if(self.theories[d.title]){
 					self.theories[d.title].WP = d;
@@ -533,8 +515,6 @@ var init = function(){
 					pairs = [],
 					e1,
 					e2;
-				console.log("n1: " + n1);
-				console.log("n2: " + n2);
 				//if length is >1, could either be because of quals or because a theory
 				//appears twice and its relationships don't change -- so account for both nodes
 				if(n1.length >1 && n2.length >1){
@@ -1523,30 +1503,30 @@ var init = function(){
 			}
 
 			//record user's vote
-			// function theoryVote(_t,_this){
+			function theoryVote(_t,_this){
 
-			// 	if(_t.WP && _t.WP.slug){
-			// 		var new_vote = voting.vote(_t.WP.slug);
+				if(_t.WP && _t.WP.slug){
+					var new_vote = voting.vote(_t.WP.slug);
 
-			// 		d3.select(_this)
-			// 			.classed('voted',function(d){ return new_vote == 1; })
-			// 			.html(function(d){
-			// 				var current_value = parseInt(_this.innerHTML.split(' ')[1]);
-			// 				return ' ' +(current_value +new_vote +' votes');
-			// 			});
-			// 	}
-			// }
+					d3.select(_this)
+						.classed('voted',function(d){ return new_vote == 1; })
+						.html(function(d){
+							var current_value = parseInt(_this.innerHTML.split(' ')[1]);
+							return ' ' +(current_value +new_vote +' votes');
+						});
+				}
+			}
 
 			//tweet an endorsement
-			// function theoryTweet(_t){
-			// 	var body = "I endorse the '" +_t.name +"' theory! Cast your vote:",
-			// 		form = 'text=' +self.encode(body),
-			// 		link = 'url=' +self.encode('http://www.quantamagazine.org/?p=17950'),
-			// 		hand = 'via=QuantaMagazine',
-			// 		twit = 'https://twitter.com/intent/tweet?' +form +'&' +link +'&' +hand;
-			// 	//window.top.location.href = twit;
-			// 	window.open(twit,'_blank');
-			// }
+			function theoryTweet(_t){
+				var body = "I endorse the '" +_t.name +"' theory! Cast your vote:",
+					form = 'text=' +self.encode(body),
+					link = 'url=' +self.encode('http://www.quantamagazine.org/?p=17950'),
+					hand = 'via=QuantaMagazine',
+					twit = 'https://twitter.com/intent/tweet?' +form +'&' +link +'&' +hand;
+				//window.top.location.href = twit;
+				window.open(twit,'_blank');
+			}
 
 			//bring up theory index screen
 			function showIdxBox(){
@@ -1628,14 +1608,12 @@ var init = function(){
 			}
 
 			function update_link(){
-				console.log("In the update_link function.");
-				console.log(this);
+
 				this.attr('d',function(d){
 					var arr = [],
 						src = {},
 						tar = {};
 
-					console.log("do we make the fisheye?");
 					d.source.fisheye = fisheye(d.source);
 					d.target.fisheye = fisheye(d.target);
 
@@ -1903,7 +1881,7 @@ var init = function(){
 		}
 	}
 }
- // initialize the function
+
 var vis = init();
 vis.generate();
 
