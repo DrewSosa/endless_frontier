@@ -10,6 +10,16 @@
 			"source":"t_arpaI",
 			"target":"t_arpaH",
 			"type":"sibling"
+		},
+		{
+			"source":"t_arfl",
+			"target":"t_afwerx",
+			"type":"sibling"
+		},
+		{
+			"source":"t_arfl",
+			"target":"t_afwerx",
+			"type":"sibling"
 		}
 	]
 }

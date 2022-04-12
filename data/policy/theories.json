@@ -95,6 +95,86 @@
 			"id":"t_ORNL",
 			"name":"Oak Ridge National Lab",
 			"description":"Oak Ridge National Laboratory (ORNL) is a U.S. multiprogram science and technology national laboratory sponsored by the U.S. Department of Energy (DOE) and administered, managed, and operated by UT–Battelle as a federally funded research and development center (FFRDC) under a contract with the DOE. \n Established in 1943, ORNL is the largest science and energy national laboratory in the Department of Energy system (by size)[2] and third largest by annual budget.[3] It is located in the Roane County section of Oak Ridge, Tennessee.[4][5] Its scientific programs focus on materials, neutron science, energy, high-performance computing, systems biology and national security, sometimes in partnership with the state of Tennessee, universities and other industries. \n ORNL has several of the world's top supercomputers, including Summit, ranked by the TOP500 as Earth's second-most powerful. The lab is a leading neutron and nuclear power research facility that includes the Spallation Neutron Source the High Flux Isotope Reactor, and the Center for Nanophase Materials Sciences."
+		},
+		{
+			"id": "t_arfl",
+			"name":"Air Force Research Laboratory",
+			"description": "The [Air Force Research Laboratory] leads the discovery, development and integration of affordable warfighting technologies for our air, space and cyberspace forces.",
+			"links": [
+				"https://www.afrl.af.mil/"
+			]
+		},
+		{
+			"id": "t_nrl",
+			"name":"Air Force Research Laboratory",
+			"description": "The [United States Naval Research Laboratory] is the corporate research laboratory for the United States Navy and the United States Marine Corps. It conducts basic scientific research, applied research, technological development and prototyping.",
+			"links": [
+				"https://www.nrl.navy.mil/"
+			]
+		},
+		{
+			"id": "t_arl",
+			"name":"Army Research Laboratory",
+			"description": "The [Army Research Laboratory] is the Army’s research laboratory strategically placed under the Army Futures Command. ARL is the Army’s sole fundamental research laboratory focused on cutting-edge scientific discovery, technological innovation, and transition of knowledge products that offer incredible potential to improve the Army’s chances of surviving and winning any future conflicts.",
+			"links": [
+				"https://www.arl.army.mil/"
+			]
+		},
+		{
+			"id": "t_kesselRun",
+			"name":"Kessel Run",
+			"description": "[Kessel Run] is the operational name for Air Force Life Cycle Management Center (AFLCMC)’s Detachment 12. Its mission is to deliver combat capabilities warfighters love and revolutionize the Air Force software acquisition process. From its headquarters at Hanscom Air Force Base and with significant supporting assets in Boston, MA (Kessel Run Experimental Lab - KREL) and Langley AFB, KR builds, tests, delivers, operates and maintains cloud-based infrastructure and warfighting software applications for use by Airmen worldwide and delivers them on time, as needed and with efficiency and cost-effectiveness above other acquisition methods or practices in the Air Force and Department of Defense.",
+			"links": [
+				"https://kesselrun.af.mil/"
+			]
+		},
+		{
+			"id": "t_sbir",
+			"name":"Small Business Innovation Research (SBIR) / Technnology Transfer (STTR)",
+			"description": "The [Small Business Innovation Research] (SBIR) and Small Business Technology Transfer (STTR) programs are highly competitive programs that encourage domestic small businesses to engage in Federal Research/Research and Development (R/R&D) with the potential for commercialization. Through a competitive awards-based program, SBIR and STTR enable small businesses to explore their technological potential and provide the incentive to profit from its commercialization. By including qualified small businesses in the nation's R&D arena, high-tech innovation is timulated, and the United States gains entrepreneurial spirit as it meets its specific research and development needs. Central to the STTR program is the partnership between small businesses and nonprofit research institutions. The STTR program requires the small business to formally collaborate with a research institution in Phase I and Phase II. STTR's most important role is to bridge the gap between performance of basic science and commercialization of resulting innovations.",
+			"links": [
+				"https://www.sbir.gov/about"
+			]
+		},
+		{
+			"id": "t_afwerx",
+			"name":"AFWERX",
+			"description": "As the innovation arm of the Department of the Air Force and powered by the Air Force Research Laboratory, [AFWERX] transitions agile, affordable and accelerated capabilities by teaming innovative technology developers with Airmen and Guardian talent. The three core arms of AFWERX - AFVentures, Spark and Prime - serve to expand the defense industrial base for advanced technologies, empower Airmen and Guardian talent, and drive faster technology transition to operational capability. AFWERX teams internationally across academia, industry and government to develop technology, expand talent, and transition dual-use capabilities.",
+			"links": [
+				"https://afwerx.com/"
+			]
+		},
+		{
+			"id": "t_inqtel",
+			"name":"In-Q-Tel",
+			"description": "[In-Q-Tel] (IQT), formerly Peleus and In-Q-It, is an American not-for-profit venture capital firm based in Arlington, Virginia. It invests in high-tech companies to keep the Central Intelligence Agency, and other intelligence agencies, equipped with the latest in information technology in support of United States intelligence capability.",
+			"links": [
+				"https://www.iqt.org/"
+			]
+		},
+		{
+			"id": "t_diu",
+			"name":"Defense Innovation Unit",
+			"description": "The [Defense Innovation Unit] (DIU) strengthens our national security by accelerating the adoption of commercial technology throughout the military and growing the national security innovation base. DIU partners with organizations across the Department of Defense (DoD), from the services and components to combatant commands and defense agencies, to rapidly prototype and field advanced commercial solutions that address national security challenges. With offices in Silicon Valley, Boston, Austin, and the Pentagon, DIU connects its DoD partners with leading technology companies across the country.",
+			"links": [
+				"https://www.diu.mil/"
+			]
+		},
+		{
+			"id": "t_jaic",
+			"name":"Joint Artificial Intelligence Center",
+			"description": "The [Joint Artificial Intelligence Center] (JAIC) is focused on attracting and cultivating mission-driven, world class AI talent to rise to the challenge of harnessing AI to advance America's security and prosperity. Across the DoD, the JAIC is driving exciting change at the intersection of AI, large scale data systems, and some of the most important missions of our time.",
+			"links": [
+				"https://www.ai.mil/"
+			]
+		},
+		{
+			"id": "t_sofwerx",
+			"name":"SOFWERX",
+			"description": "[SOFWERX] was created under a Partnership Intermediary Agreement, established in September of 2015, between DEFENSEWERX and the United States Special Operations Command (USSOCOM). Located in Tampa, FL, SOFWERX has a dynamic environment designed to create a high rate of return on collision for all participants. Through the use of our growing ecosystem, promotion of divergent thought, and neutral facilitation, its goal is to bring the right minds together to solve challenging problems.",
+			"links": [
+				"https://www.sofwerx.org/"
+			]
 		}
 	]
 }

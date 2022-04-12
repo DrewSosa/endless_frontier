@@ -300,7 +300,7 @@ var init = function(){  //init will return a list of functions :)
 
 
            for (let i = 0; i <files.length; i++) {
-                var str = '../data/policy/' + files[i] +'.json';
+                var str = '/data/policy/' + files[i] +'.json';
                 data = await d3.json(str);
                 self.data_raw[files[i]] = await data[files[i]];
 
@@ -798,7 +798,7 @@ var init = function(){  //init will return a list of functions :)
 				})
 				.html(function(d){ return d.name; });
             col_02
-				.on('click',function(d){
+				.on('click',function(event, d){
 					colClick(d);
 				});
 			col_02.exit().remove();
@@ -810,7 +810,7 @@ var init = function(){  //init will return a list of functions :)
                 .classed('theoryLink', true);
 
 			col_03
-				.classed('topic',function(d){
+				.classed('topic',function(event, d){
                     print(d.topic);
 					return d.topic;
 				})
@@ -828,7 +828,7 @@ var init = function(){  //init will return a list of functions :)
 				})
 				.html(function(d){ return d.name; });
 			col_03
-				.on('click',function(d){
+				.on('click',function(event, d){
 					colClick(d);
 				});
 			col_03.exit().remove();
@@ -1723,7 +1723,7 @@ var init = function(){  //init will return a list of functions :)
 							} else if(_d.source.id === 'hierProb' && _d.target.id === 'strongCP'){
 								p = src ? this.getPointAtLength(2*l/3) : this.getPointAtLength(5*l/6);
 							}
-                            else if(_d.source.id === 'cosConst' && _d.target.id === 'darkEnergy'){
+                            else if(_d.source.id === 'defenseInnovation' && _d.target.id === 'ARPAs'){
 								p = this.getPointAtLength(l/3);
 							}
                             else{

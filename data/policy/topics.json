@@ -60,6 +60,35 @@
 			]
 		},
 		{
+			"id":"defenseInnovation",
+			"name":"Defense Innovation",
+			"size":8,
+			"date":"",
+			"question":"How does our military innovate?",
+			"description":"Most don't know that innovation lies at the bedrock of our nation's national security. How fast our defense system adopts innovation will spell out our future.",
+			"theories":[
+				"t_arfl",
+				"t_nrl",
+				"t_arl",
+				"t_kesselRun",
+				"t_sbir",
+				"t_afwerx",
+				"t_inqtel",
+				"t_diu",
+				"t_jaic",
+				"t_sofwerx",
+				"t_darpa"
+			],
+			"children":[
+
+				{
+					"id": "arpa",
+					"overlap": 2
+				}
+
+			]
+		},
+		{
 			"id":"nationalLabs",
 			"name":"National Labs",
 			"size":8,
