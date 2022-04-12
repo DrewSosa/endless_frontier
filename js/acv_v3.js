@@ -362,6 +362,10 @@ var init = function(){  //init will return a list of functions :)
                     posX = 450;
                     posY = 398;
                 }
+                else if (d.id === 'defenseInnovation'){
+                    posX = 300;
+                    posY = 398;
+                }
                 else{
 					posX = centerX;
 					posY = centerY;
