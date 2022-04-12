@@ -301,7 +301,7 @@ var init = function(){  //init will return a list of functions :)
 
            for (let i = 0; i <files.length; i++) {
                 // var str = '/data/policy/' + files[i] +'.json';
-                var str = 'http://DrewSosa.github.io/ST_Map/data/policy/' + files[i] +'.json';
+                var str = 'https://DrewSosa.github.io/ST_Map/data/policy/' + files[i] +'.json';
                 data = await d3.json(str);
                 self.data_raw[files[i]] = await data[files[i]];
 
