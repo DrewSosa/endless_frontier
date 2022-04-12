@@ -310,34 +310,7 @@ var init = function(){  //init will return a list of functions :)
             self.processData();
 
 
-            // var promises = [];
-            // files.forEach(function(filename){
-            //     var str = '../data/policy/' + filename +'.json';
-            //     promises.push(d3.json(str))
-            // })
-            // Promise.all(promises).then(function(data){
-            //     files.forEach(function(filename){
-            //         self.data_raw[filename] = data[filename];
-            //     });
-            // });
-            // console.log(self.data_raw);
 
-
-
-
-
-            // sets.forEach(async function (d, i) {
-            //     // i think this is where the data is accessed.
-            //     var str = '../data/policy/' + d + '.json';
-            //     // here is the solution for now.
-            //     await d3.json(str).then(function (data) {
-            //         self.data_raw[d] = data[d];
-            //         //investigating the callback function.
-            //         // self.loadingManager(d,callback);
-            //     });
-
-            // });
-            // self.processData();
 
 			//get all JSON files
             //old calback version 2/26/2022
