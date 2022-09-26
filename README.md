@@ -58,37 +58,40 @@ Our remedy to this is a graph-based visualization that exhibits the various inst
 
 1. Topic nodes - see below for an example of the token structure.
     1. id - identifier of the topic, meant to be short and sweet.
-    2. name - Name of the topic or institution, ex: ARPAs, Innovative
+    > id: national_labs
+    2. name - Name of the topic or institution.
+    > name: National Labs
     3. size - size of the node on the graph. Undetermined how I will use this.
     4. date - Not sure of this. Maybe Last updated?
     5. question - prompting question shown when the user clicks a topic.
+    > question: What are National Labs?
     6. description - a fitting description of what the topic is. ex: “
+    > description: ARPAs create radically better approaches to hard problems by conducting solutions-oriented R&D.
     7. theories - a list of theories or related subtopics.
-    8. children - a list of related subtopics?  Don’t really understand this.
-     > id: national_labs
-
-     > name: National Labs
-
-     > question: What are National Labs?
-
-     > description: ARPAs create radically better approaches to hard problems by conducting solutions-oriented R&D.
-
-     > theories: [t_LANL", "t_ANL", "t_ORNL]
-
-     > children:[{ "id":"darkEnergy","overlap":8},
+    > theories: [t_LANL", "t_ANL", "t_ORNL]
+    8. children - a list of related topics, with details about their overlaps.
+    > children:[{ "id":"darkEnergy","overlap":8},
         > {"id":"hierProb", "overlap":1}]
 
     Theory tokens follow a similar structure.
-    > id: t_ANL
-    > name: Argonne National Lab
-    > description: Argonne National Laboratory is a science and engineering research national laboratory operated by UChicago Argonne LLC for the United States Department of Energy...today it maintains a broad portfolio in basic science research, energy storage and renewable energy, environmental sustainability, supercomputing, and national security.
-    > links: Argonne ["https://en.wikipedia.org/wiki/Argonne_National_Laboratory"]
-    > budget: (not implemented yet), $ amount allocated for agency or institution in 2022.
+    <blockquote>
+    id: t_ANL
+
+    name: Argonne National Lab
+
+    description: Argonne National Laboratory is a science and engineering research national laboratory operated by UChicago Argonne LLC for the United States Department of Energy...today it maintains a broad portfolio in basic science research, energy storage and renewable energy, environmental sustainability, supercomputing, and national security.
+
+    links: Argonne ["https://en.wikipedia.org/wiki/Argonne_National_Laboratory"]
+
+    budget: (not implemented yet), $ amount allocated for agency or institution in 2022.
+    </blockquote>
 
     Theory link tokens have the following structure of `source | target | type`
-    > source: t_ORNL (Oak Ridge National Lab)
-    > target: t_arpaE (Advanced Research Projects—Energy)
-    > type: sibling
+    <blockquote>
+    source: t_ORNL (Oak Ridge National Lab)
+    target: t_arpaE (Advanced Research Projects—Energy)
+    type: sibling
+    </blockquote>
 
 **Programming Language**: Currently, we use Javascript, HTML, & CSS for this project. However, we may want to switch to a more modern framework to host this.
 
