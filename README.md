@@ -66,10 +66,15 @@ Our remedy to this is a graph-based visualization that exhibits the various inst
     7. theories - a list of theories or related subtopics.
     8. children - a list of related subtopics?  Don’t really understand this.
      > id: national_labs
+
      > name: National Labs
+
      > question: What are National Labs?
+
      > description: ARPAs create radically better approaches to hard problems by conducting solutions-oriented R&D.
+
      > theories: [t_LANL", "t_ANL", "t_ORNL]
+
      > children:[{ "id":"darkEnergy","overlap":8},
         > {"id":"hierProb", "overlap":1}]
 
