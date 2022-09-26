@@ -1,4 +1,19 @@
+/*
+Written by Andrew Sosanya, Marble Labs.
+Started in February 2022, Last Updated September 2022.
+Project has taken much longer than it should! But that is okay,
+because we are going to finish it!
 
+Here is how we are going to fix it.
+TODO
+1. Figure out a good JS debugger, and put that into the workflow.
+2. Ask Karina how she would tackle this, and ask Kevin what the best way is to organize JS code.
+    On organizing JS code, we can always,
+3. Split the code into different functions—I don't know if this is necessarily best practice though?
+4. Maybe switch the dev environment to node? Basically something more modern.
+
+
+*/
 var init = function(){  //init will return a list of functions :)
 
     return {
@@ -31,7 +46,7 @@ var init = function(){  //init will return a list of functions :)
         },
 
         theoryFocus:null,
-
+        // Time it takes to fade into the main screen.
         fadeInTime:800,
         fadeInTimeout:null,
 
@@ -276,6 +291,7 @@ var init = function(){  //init will return a list of functions :)
             self.getData();
 
         },
+        // retrieves the data from the web server and segments it into theories, topics, and theory links.
         getData: async function(){
             /* Callback hell. Thank god for this link.
             https://www.hacksparrow.com/javascript/foreach-in-promise-async-function.html
@@ -306,11 +322,7 @@ var init = function(){  //init will return a list of functions :)
                 self.data_raw[files[i]] = await data[files[i]];
 
            }
-
             self.processData();
-
-
-
 
 			//get all JSON files
             //old calback version 2/26/2022
@@ -326,6 +338,8 @@ var init = function(){  //init will return a list of functions :)
         // // })
 
 		},
+        // afterwards, we call processData, which allows us
+        // to create a graph structure for the data we are working with.
         processData: function(){
             console.log(`Processing data...`);
             var self = vis;

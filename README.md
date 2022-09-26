@@ -1,11 +1,12 @@
 # Visualizing America's Science and Tech Policy Ecosystem
+*Marble Labs*
 
 
 **BLUF:** I spent the last two years learning how the science and tech (S&T) policy ecosystem works. Now I want to share it with others via visualization to get them up to speed.
 
 Background
 
-What is the motivation for these changes? What problems will this solve? Include graphs, metrics, etc. if relevant. 
+What is the motivation for these changes? What problems will this solve? Include graphs, metrics, etc. if relevant.
 
 My name is Sosa, and I have worked in S&T Policy for the last two years, most recently at the [Day One Project](http://dayoneproject.org), where I’ve been able to develop ambitious and actionable science and tech policy ideas on an array of issues, such as
 
@@ -18,22 +19,22 @@ Working in this space has granted me specialized knowledge about how the Federal
 
 # Goals
 
-What are the outcomes that will result from these changes? How will we evaluate success for the proposed changes? 
+What are the outcomes that will result from these changes? How will we evaluate success for the proposed changes?
 
 1. At a high level, we should be able to map the various institutions, entities, initiatives within the S&T ecosystem. “Ecosystem” is a broad term, but it essentially means should be able to answer questions like:
     1. Where does innovation happen?
     2. How does the government fund small businesses?
-    3. What public entities are responsible for driving progress on clean energy technology and clean infrastructure? 
-    4. How the hell does science & tech policy work? 
-    
-    *Metric -* Topics mapped, nodes in the graph.
-    
+    3. What public entities are responsible for driving progress on clean energy technology and clean infrastructure?
+    4. How the hell does science & tech policy work?
 
-This would provide value to various S&T institutions and technologists looking to get into the space. In the future, I see this living on a site that has other essays and resources relating to science and technology. 
+    *Metric -* Topics mapped, nodes in the graph.
+
+
+This would provide value to various S&T institutions and technologists looking to get into the space. In the future, I see this living on a site that has other essays and resources relating to science and technology.
 
 1. Make the map publicly available for consumption.
     1. Before doing this, release an MVP version for friends and trusted colleagues.
-    2. *Metric - Amount of views* 
+    2. *Metric - Amount of views*
 
 MVP
 
@@ -53,76 +54,49 @@ To narrow the scope of what we're working on, outline what this proposal will no
 
 # Proposed Solution
 
-Describe the solution to the problems outlined above. Include enough detail to allow for productive discussion and comments from readers.
+Our remedy to this is a graph-based visualization that exhibits the various institutions, entities, and initiatives. across the science and tech ecosystem. There are three main elements to the structure.
 
-What we’ll be creating is a graph that contains the various institutions, entities, initiatives. There are three main elements to the structure.
-
-1. Topic nodes 
-    1. id - identifier of the topic, meant to be short and sweet.  
-        
-        > ex: national labs
-        > 
+1. Topic nodes - see below for an example of the token structure.
+    1. id - identifier of the topic, meant to be short and sweet.
     2. name - Name of the topic or institution, ex: ARPAs, Innovative
-        
-        > National Labs
-        > 
-    3. size - size of the node on the graph. Undetermined how I will use this. 
-    4. date - Not sure of this.
-    5. question - prompting question shown when the user clicks a topic. Might be useful for other things later on.
-        
-        > What are National Labs?
-        > 
+    3. size - size of the node on the graph. Undetermined how I will use this.
+    4. date - Not sure of this. Maybe Last updated?
+    5. question - prompting question shown when the user clicks a topic.
     6. description - a fitting description of what the topic is. ex: “
-        
-        > ARPAs create radically better approaches to hard problems by conducting solutions-oriented R&D.
-        > 
     7. theories - a list of theories or related subtopics.
-        
-        
-        > [t_LANL", "t_ANL", "t_ORNL]
-        > 
-        
     8. children - a list of related subtopics?  Don’t really understand this.
-    9. ***budget - $ amount allocated for agency or institution in 2022.***
-    
-    > ARL - $1.2B budget.
-    > 
+     > id: national_labs
+     > name: National Labs
+     > question: What are National Labs?
+     > description: ARPAs create radically better approaches to hard problems by conducting solutions-oriented R&D.
+     > theories: [t_LANL", "t_ANL", "t_ORNL]
+     > children:[{ "id":"darkEnergy","overlap":8},
+        > {"id":"hierProb", "overlap":1}]
 
-1. Theories
-    1. id
-        
-        > t_ANL
-        > 
-    2. name
-        
-        > Argonne National Lab
-        > 
-    3. Description
-        
-        > [Argonne National Laboratory] is a science and engineering research national laboratory operated by UChicago Argonne LLC for the United States Department of Energy...today it maintains a broad portfolio in basic science research, energy storage and renewable energy, environmental sustainability, supercomputing, and national security.
-        > 
-    4. neighbors
-    
-    > Quantum Smart Initiative in Chicago.
-    > 
+    Theory tokens follow a similar structure.
+    > id: t_ANL
+    > name: Argonne National Lab
+    > description: Argonne National Laboratory is a science and engineering research national laboratory operated by UChicago Argonne LLC for the United States Department of Energy...today it maintains a broad portfolio in basic science research, energy storage and renewable energy, environmental sustainability, supercomputing, and national security.
+    > links: Argonne ["https://en.wikipedia.org/wiki/Argonne_National_Laboratory"]
+    > budget: (not implemented yet), $ amount allocated for agency or institution in 2022.
 
-**Programming Language**: Javascript, HTML, CSS for MVP.
+    Theory link tokens have the following structure of `source | target | type`
+    > source: t_ORNL (Oak Ridge National Lab)
+    > target: t_arpaE (Advanced Research Projects—Energy)
+    > type: sibling
 
-- Perhaps we might want to use React in the future to host this.
+**Programming Language**: Currently, we use Javascript, HTML, & CSS for this project. However, we may want to switch to a more modern framework to host this.
 
-**Data Engineering**: Airtable (preferred) or Firebase. 
+**Data Engineering**: Airtable (preferred) or Firebase.
 
 - Host all the data on Airtable for easy management and maintance, as well as for crowdfunding purposes.
 - Perhaps depending on how large this gets in the future, we choose to host on AWS.
 
 - Create a new database of the S&T graph.
-    - Perhaps we store this data in Airtable and then send it to
-    - Creating the Database. Each node in the graph
-        - Essentially need to write out the graph of topics in JSON format, along with their corresponding subtopics and connecting edges, a
-        - Could map via institutions - National Labs (ex: Los Alamos) , Federal Science Agencies (ex: NIH, NSF), Congressional Committees (ex: Science, Commerce and Transportation),
-        - Could also map it topically -  Immigration, Innovation, Venture, Climate
-        - I’d want to include cool policy ideas that are associated with each major node in the graph.
-    
-- Perhaps, I want to structure each graph as a node.
+    - Two tables—one for theories and one for topics, with ther primary key being their `id`. These tables serve as our primary interface with the raw data.
+    - Leverage airtable.js to take the graph-based data and serialize to JSON objects, which are then saved to the `data/policy` folder.
 
-- **Language**: HTML, CSS, and Javascript.   However, I believe this could be formatted as a React app as well.
+
+## How to Contribute
+
+Contributions are to the S&T Map are encouraged. Contributors can directly contribute through GitHub by making a pull request. Soon, we are also working on an Airtable form as an avenue for contribution.
