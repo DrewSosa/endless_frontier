@@ -4,7 +4,7 @@
 
 **BLUF:** I spent the last two years learning how the science and tech (S&T) policy ecosystem works. Now I want to share it with others via visualization to get them up to speed.
 
-Background
+## Background
 
 What is the motivation for these changes? What problems will this solve? Include graphs, metrics, etc. if relevant.
 
@@ -17,7 +17,7 @@ My name is Sosa, and I have worked in S&T Policy for the last two years, most re
 
 Working in this space has granted me specialized knowledge about how the Federal Government works and the corresponding mechanisms of S&T Policy. The discipline is growing (especially as billionaires like [Eric Schmidt](https://www.schmidtfutures.com/) and [Patrick Collison](https://progress.institute/) take interest),  and there’s an increasing amount of dedicated doing impact work. However, I’ve found that the S&T policy space is still very nascent, and the extreme disconnect between technologists and policy is still as real as ever, which if you’ve ever watched the Facebook [hearings](https://www.youtube.com/watch?v=ncbb5B85sd0&ab_channel=CNET), *you know what I mean.* A *[lot](https://www.c-span.org/video/?462071-1/technology-companies-algorithms),* and I mean ***a [lot](https://www.c-span.org/video/?509234-1/senate-intelligence-hearing-solarwinds-hacking)*** of our problems in policy suffer from a [lack](https://www.blackburn.senate.gov/2021/7/mask-mandates-are-about-power-not-science) of [perspective](https://www.youtube.com/watch?v=ncbb5B85sd0&ab_channel=CNET) from [technologists](https://www.cnbc.com/2021/08/16/tax-foundation-infrastructure-bill-crypto-tax-provision-is-unworkable.html). But this also means that there is an opportunity for folks like us to **meaningfully contribute.**
 
-# Goals
+# Project Goals
 
 What are the outcomes that will result from these changes? How will we evaluate success for the proposed changes?
 
@@ -89,7 +89,9 @@ Our remedy to this is a graph-based visualization that exhibits the various inst
     Theory link tokens have the following structure of `source | target | type`
     <blockquote>
     source: t_ORNL (Oak Ridge National Lab)
+
     target: t_arpaE (Advanced Research Projects—Energy)
+
     type: sibling
     </blockquote>
 
