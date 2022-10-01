@@ -1,7 +1,6 @@
 # Visualizing America's Science and Tech Policy Ecosystem
 *Marble Labs*
 
-
 **BLUF:** I spent the last two years learning how the science and tech (S&T) policy ecosystem works. Now I want to share it with others via visualization to get them up to speed.
 
 ## Background
