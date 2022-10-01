@@ -1,1 +1,5 @@
-theme: jekyll-theme-minimal
+baseURL = 'http://sosa.com/'
+languageCode = 'en-us'
+title = 'Sosa'
+
+publishDir = 'docs'
