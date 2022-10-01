@@ -1,5 +1,4 @@
 baseURL = 'http://endless_frontier.xyz/'
 languageCode = 'en-us'
 title = 'The Endless Frontier'
-
 publishDir = 'docs'

@@ -13,6 +13,13 @@
     <script type='text/javascript' src='js/fisheye.js'></script>
     <script type='text/javascript' src='js/script.js'></script>
 
+	<script type="module">
+
+		import * as d3 from "https://cdn.skypack.dev/d3@7";
+
+		const div = d3.selectAll("div");
+
+	</script>
     <!-- old dependencies -->
     <!-- <script type='text/javascript' src='js/libs/d3.v3.min.js'></script>
     <script type='text/javascript' src='js/libs/jquery-2.1.4.min.js'></script>
@@ -35,7 +42,7 @@
 	<div id='vis'>
 		<svg id='map' viewBox='0 0 1436 782' preserveAspectRatio='xMidYMid meet'></svg>
 		<div id='titleCred' class='htmlElem textBox'>
-			<div class='main'>Theories of Everything, Mapped</div>
+			<div class='main'>The Endless Frontier</div>
 			<div class='return'>&larr;&nbsp;Back to article</div>
 		</div>
 		<div id='xBack' class='htmlElem return'>&larr;&nbsp;BACK TO MAIN</div>
@@ -70,16 +77,16 @@
 	</div>
 	<div id='fullScreen' class='htmlElem'>
 		<div class='main'>
-			<div> The R&D Ecosystem—Mapped</div>
+			<div> Enter the Endless Frontier </div>
 			<div class='sub below'>Learn how all of the pieces come together.</div>
-            <div class='sub below'>This is a work in progress.</div>
+            <div class='sub below'>Innovation</div>
 			<div class='cred below'>Andrew "Sosa" Sosanya <span class='start'>Start&nbsp;&rarr;</span></div>
 		</div>
 	</div>
 	<!-- starts on init. -->
 	<script>
-		console.log("Starting the ACV version");
+		console.log("Enter the Endless Frontier");
 	</script>
-	<script type='text/javascript' src='js/acv_v3.js'></script>
+	<script type='text/javascript' src='js/frontier.js'></script>
 
 </html>

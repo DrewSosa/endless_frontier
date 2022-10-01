@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <!-- Frame Source -->
+<head>
+    <meta charset="UTF-8">
+
+	<title>POLICY MAP</title>
+    <link rel='stylesheet' type='text/css' href='css/acv_style.css' />
+    <!-- <script type='text/javascript' src='js/jquery-3.6.0.min.js'></script> -->
+	<script type='text/javascript' src='js/jquery-2.1.4.min.js'></script>
+    <script type='text/javascript' src='js/d3.js'></script>
+	<script type='text/javascript' src='js/old_d3.js'></script>
+    <script type='text/javascript' src='js/fisheye.js'></script>
+    <script type='text/javascript' src='js/script.js'></script>
+
+	<script type="module">
+
+		import * as d3 from "https://cdn.skypack.dev/d3@7";
+
+		const div = d3.selectAll("div");
+
+	</script>
+    <!-- old dependencies -->
+    <!-- <script type='text/javascript' src='js/libs/d3.v3.min.js'></script>
+    <script type='text/javascript' src='js/libs/jquery-2.1.4.min.js'></script>
+    <script type='text/javascript' src='js/libs/fisheye.js'></script>
+    <script type='text/javascript' src='js/script.js?v=20170512'></script> -->
+
+</head>
+
+
+<body>
+    <!-- loading screen -->
+    <div id='loading'>
+		<div class="spinner">
+		  <div class="bounce1"></div>
+		  <div class="bounce2"></div>
+		  <div class="bounce3"></div>
+		</div>
+	</div>
+    <!-- visualization home screen -->
+	<div id='vis'>
+		<svg id='map' viewBox='0 0 1436 782' preserveAspectRatio='xMidYMid meet'></svg>
+		<div id='titleCred' class='htmlElem textBox'>
+			<div class='main'>Theories of Everything, Mapped</div>
+			<div class='return'>&larr;&nbsp;Back to article</div>
+		</div>
+		<div id='xBack' class='htmlElem return'>&larr;&nbsp;BACK TO MAIN</div>
+
+		<div id='idxHolder'>
+			<div id='idx' class='htmlElem return'></div>
+			<div id='xIdx' class='htmlElem return'>INDEX</div>
+		</div>
+		<div id='idxBox' class='htmlElem textBox'>
+			<div class='title'>Theory Index</div>
+			<div id='list'>
+				<div class='col col_01'></div>
+				<div class='col col_02'></div>
+				<div class='col col_03'></div>
+			</div>
+			<div id="xOut"></div>
+		</div>
+
+		<div id='hBox' class='htmlElem textBox'>
+			<div class='descrip q'></div>
+			<div class='descrip body'></div>
+		</div>
+		<div id='t_hBox' class='htmlElem textBox'>
+			<div class='descrip t_name'></div>
+			<div class='descrip t_interact'>
+				<div class='t_vote'></div>
+				<div class='t_tweet'></div>
+			</div>
+			<div class='descrip t_body'></div>
+		</div>
+		<div id='topicLabel' class='htmlElem'><span></span></div>
+	</div>
+	<div id='fullScreen' class='htmlElem'>
+		<div class='main'>
+			<div> The R&D Ecosystem—Mapped</div>
+			<div class='sub below'>Learn how all of the pieces come together.</div>
+            <div class='sub below'>This is a work in progress.</div>
+			<div class='cred below'>Andrew "Sosa" Sosanya <span class='start'>Start&nbsp;&rarr;</span></div>
+		</div>
+	</div>
+	<!-- starts on init. -->
+	<script>
+		console.log("Starting the ACV version");
+	</script>
+	<script type='text/javascript' src='js/acv_v3.js'></script>
+
+</html>
