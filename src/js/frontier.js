@@ -13,6 +13,9 @@ TODO
 4. Maybe switch the dev environment to node? Basically something more modern.
 
 */
+
+// import * as d3 from "https://cdn.skypack.dev/d3@7";
+
 var init = function(){  //init will return a list of functions :)
 
     return {
@@ -314,11 +317,19 @@ var init = function(){  //init will return a list of functions :)
             // }).then( () => self.processData());
 
 
-           for (let i = 0; i <files.length; i++) {
-                // var str = '/data/policy/' + files[i] +'.json';
-                var str = 'https://DrewSosa.github.io/ST_Map/data/policy/' + files[i] +'.json';
-                data = await d3.json(str);
-                self.data_raw[files[i]] = await data[files[i]];
+           for (let i = 0; i < files.length; i++) {
+                var repsonse = await fetch('./data/policy/' + files[i] +'.json');
+                // public version below.
+                // var str = 'https://DrewSosa.github.io/ST_Map/data/policy/' + files[i] +'.json';
+                // var str = "https://raw.githubusercontent.com/DrewSosa/ST_Map/server_config/data/policy/topics.json"
+                // var str = 'https://raw.githubusercontent.com/DrewSosa/ST_Map/server_config/data/policy/' + files[i] +'.json';
+                var data = await repsonse.json();
+
+                console.log("hi im data", data);
+                // var d3data = await d3.json(data);
+
+                self.data_raw[files[i]] = data[files[i]];
+                console.log("raw data", self.data_raw)
 
            }
             self.processData();

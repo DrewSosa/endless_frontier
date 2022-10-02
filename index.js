@@ -4,23 +4,38 @@ const express = require('express')
 const app = express();
 const http = require('http')
 const hostname = '127.0.0.1'
-const port = 3000;
+const port = 4000;
+
+// app.use(express.static(__dirname));
+app.use(express.static("src"));
+app.use(express.static("src/data"));
+
 
 //Idiomatic expression in express to route and respond to a client request
 app.get('/', (req, res) => {        //get requests to the root ("/") will route here
-  res.statusCode = 200;
+  const url = req.url
+
 
   res.sendFile('index.html', {root: __dirname});      //server responds by sending the index.html file to the client's browser
                                                       //the .sendFile method needs the absolute path to the file, see: https://expressjs.com/en/4x/api.html#res.sendFile
-  res.render("index")
+  if (url === "/close") {
+    process.send("STOP");
+  }
 
 });
 
 // listen for incoming requests.
 app.listen(port, () => { //server starts listening for any attempts from a client to connect at port: {port}
+  if (err) console.log(err);
   console.log(`Now listening on port ${port}`);
   console.log("Hi Mom!");
 });
+
+
+process.on("STOP", function(){
+  console.log("Exiting NodeJS server");
+  app.close();
+})
 
 
 
