@@ -109,4 +109,4 @@ Our remedy to this is a graph-based visualization that exhibits the various inst
 
 ## How to Contribute
 
-Contributions are to the S&T Map are encouraged. Contributors can directly contribute through GitHub by making a pull request. Soon, we are also working on an Airtable form as an avenue for contribution.
+Contributions to the Endless Frontier are encouraged. Contributors can directly contribute through GitHub by making a pull request. Soon, we are also working on an Airtable form as an avenue for contribution.
